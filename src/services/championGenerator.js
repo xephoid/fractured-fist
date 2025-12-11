@@ -7,8 +7,6 @@ const getRandom = (arr, count) => {
     return shuffled.slice(0, count);
 };
 
-const getStarters = () => TECHNIQUES.filter(t => !t.faction && t.type === CARD_TYPES.TECHNIQUE && t.cost <= 3).map(t => t.id); // Loose def of starter? No, specific list in rules.
-const STARTERS = ['jab', 'block', 'center', 'reading_the_opponent', 'deflecting_block', 'counter_strike', 'combination_rush', 'quicken', 'guard', 'assess', 'react'];
 // Actually rules list 7 specific starters: Jab, Block, React, Quicken, Center, Guard, Assess.
 const TRUE_STARTERS = ['jab', 'block', 'react', 'quicken', 'center', 'distract', 'assess'];
 
@@ -40,8 +38,8 @@ export const generateChampion = (tier, factionId) => {
             // 4 Starter + 1 General + 1 Faction
             loadout = [
                 ...getRandom(starters, 4),
-                ...getRandom(generals, 1),
-                ...(factionId ? getRandom(factionCards, 1) : getRandom(starters, 1))
+                ...getRandom(generals, 2),
+                //...(factionId ? getRandom(factionCards, 1) : getRandom(starters, 1))
             ];
             break;
         case 2:

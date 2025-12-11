@@ -19,9 +19,9 @@ export const TECHNIQUES = [
     { id: 'jab', name: 'Jab', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "Deal 1 Damage.", faction: null, effects: { damage: 1 } },
     { id: 'block', name: 'Block', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "Add 1 Defense.", faction: null, effects: { defense: 1 } },
     { id: 'react', name: 'React', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Actions.", faction: null, effects: { actions: 2 } },
-    { id: 'quicken', name: 'Quicken', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "Draw 1 Card.", faction: null, effects: { draw: 1 } },
-    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+1 Channel.", faction: null, effects: { channels: 1 } },
-    { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Misstep", faction: null, effects: { add_misstep: 1 } },
+    { id: 'quicken', name: 'Quicken', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "Draw 2 Cards.", faction: null, effects: { draw: 2 } },
+    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+3 Spirit", faction: null, effects: { spirit: 3 } },
+    { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Missteps", faction: null, effects: { add_misstep: 2 } },
     { id: 'assess', name: 'Assess', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "Refine 1 card", faction: null, effects: { refine: 1 } },
 
     // --- MASTERS' CIRCLE ---

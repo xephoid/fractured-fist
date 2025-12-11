@@ -6,7 +6,7 @@ import { FACTION_IDS } from '../../data/factions';
 import { TECHNIQUES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 
-export default function LocationDetail({ locationId, onBack, onFight }) {
+export default function LocationDetail({ locationId, onBack, onFight, onOpenCollection }) {
     const { state } = useCampaign();
     const loc = LOCATIONS.find(l => l.id === locationId);
 
@@ -49,6 +49,13 @@ export default function LocationDetail({ locationId, onBack, onFight }) {
         <div className="screen container">
             <header style={{ borderBottom: '1px solid #444', paddingBottom: '10px', marginBottom: '20px' }}>
                 <button onClick={onBack}>&larr; Back to Map</button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', float: 'right' }}>
+                    <button onClick={onOpenCollection}>Manage Techniques</button>
+                    <div>
+                        <div>Lvl {state.player.level} {state.player.species}</div>
+                        <div>{state.player.credits} Credits</div>
+                    </div>
+                </div>
                 <h1>{loc.name}</h1>
                 <p>{loc.description}</p>
                 <div style={{ color: '#aaa', fontStyle: 'italic' }}>{loc.type === 'HOME_BASE' ? 'Faction Stronghold' : 'Contested Zone'}</div>

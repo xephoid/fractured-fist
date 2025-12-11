@@ -179,7 +179,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         if (effects.defense) setDefense(p => p + effects.defense);
         if (effects.damage) setDamageDealt(p => p + effects.damage);
         if (effects.channels) setChannels(p => p + effects.channels); // Channel Limit Rule
-        if (effects.stamina) setPlayerStamina(p => p + effects.stamina);
+        if (effects.heal) setPlayerStamina(p => p + effects.heal);
 
         if (def.value) setSpirit(p => p + def.value);
 
@@ -289,7 +289,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         addLog("Enemy acting...");
 
         // Debug: Log Hand
-        const handNames = enemyHand.map(id => TECHNIQUES.find(c => c.id === id)?.name || id).join(', ');
+        //const handNames = enemyHand.map(id => TECHNIQUES.find(c => c.id === id)?.name || id).join(', ');
         //addLog(`Enemy Hand: ${handNames}`);
 
         // 1. Play Resources & Calc Spirit
@@ -422,6 +422,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
                 return Math.max(max, c?.cost || 0);
             }, 0) || 0;
             const aiStrategy = maxLoadoutCost >= 6 ? 'RAMP' : 'AGGRO';
+            console.log('aiStrategy', aiStrategy);
 
             // Only log on turn 1 (heuristically checking log length or turn count passed in state? 
             // We don't have turn count in this scope easily without prop drill or state read. 

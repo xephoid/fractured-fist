@@ -18,7 +18,7 @@ const Card = ({ cardId, onClick, disabled, count, showCost, highlight }) => {
         <div
             onClick={!disabled ? onClick : undefined}
             style={{
-                width: '80px', height: '110px',
+                width: '100px', height: '130px',
                 border: `2px solid ${borderColor}`,
                 borderRadius: '6px',
                 backgroundColor: '#222',
@@ -139,9 +139,9 @@ export default function CombatScreen({ onFinish, enemyData }) {
                 </div>
 
                 {/* Supply */}
-                <div style={{ flex: 1, padding: '10px', overflowX: 'auto' }}>
+                <div style={{ flex: '1 1 5%', padding: '10px', overflowX: 'auto' }}>
                     <small>Your Supply ({cs.spirit} Spirit) | <strong>Channels Left: {cs.channels}</strong></small>
-                    <div style={{ display: 'flex', gap: '5px', marginTop: '5px' }}>
+                    <div style={{ display: 'flex', flexFlow: 'wrap', gap: '5px', marginTop: '5px' }}>
                         {Object.keys(cs.playerSupply).map(id => (
                             <Card
                                 key={id}
@@ -170,7 +170,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
                             </button>
                         )}
                         {isTechniquePhase && (
-                            <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#444' }}>
+                            <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#000', color: 'white' }}>
                                 To Channel &rarr;
                             </button>
                         )}
