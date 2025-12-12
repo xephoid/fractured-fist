@@ -82,7 +82,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
             {/* Top: Enemy Stats */}
             <div style={{ flex: 1, borderBottom: '1px solid #444', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                    <h3 style={{ margin: 0 }}>Enemy</h3>
+                    <h3 style={{ margin: 0 }}>{enemy.name}</h3>
                     <div>HP: {cs.enemyStamina}</div>
                     <div style={{ fontSize: '12px', color: '#aaa' }}>
                         Deck: {cs.enemyDeck.length} | Hand: {cs.enemyHand.length}
@@ -92,7 +92,17 @@ export default function CombatScreen({ onFinish, enemyData }) {
                     </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <h2>{cs.phase}</h2>
+                    <h2>{cs.phase} Phase</h2>
+                    {cs.phase === PHASES.TECHNIQUE && (
+                        <div>
+                            Click the <strong>technique</strong> card from your hand to use it.
+                        </div>
+                    )}
+                    {cs.phase === PHASES.CHANNEL && (
+                        <div>
+                            Click the <strong style={{ color: 'yellow' }}>spirit</strong> card(s) you want to spend from your hand, <br />then click the <strong>techneque</strong> or <strong style={{ color: 'yellow' }}>spirit</strong> card you want to channel from your available techniques.
+                        </div>
+                    )}
                     {cs.phase === PHASES.RESOLUTION && (
                         <div style={{ color: 'orange' }}>
                             Enemy Damage: {cs.enemyDamage} | Enemy Defense: {cs.enemyDefense}
@@ -132,15 +142,15 @@ export default function CombatScreen({ onFinish, enemyData }) {
             )}
 
             {/* Middle: Log & Supply */}
-            <div style={{ flex: 2, display: 'flex', overflow: 'hidden', borderBottom: '1px solid #444' }}>
+            <div style={{ flex: 2, display: 'flex', borderBottom: '1px solid #444' }}>
                 {/* Log */}
                 <div style={{ width: '200px', borderRight: '1px solid #333', overflowY: 'auto', fontSize: '11px', padding: '5px', color: '#ccc' }}>
                     {cs.log.slice().reverse().map((l, i) => <LogLine key={i} text={l} />)}
                 </div>
 
                 {/* Supply */}
-                <div style={{ flex: '1 1 5%', padding: '10px', overflowX: 'auto' }}>
-                    <small>Your Supply ({cs.spirit} Spirit) | <strong>Channels Left: {cs.channels}</strong></small>
+                <div style={{ flex: 1, padding: '10px', overflowX: 'auto' }}>
+                    <small>Your Available Techniques ({cs.spirit} Spirit) | <strong>Channels Left: {cs.channels}</strong></small>
                     <div style={{ display: 'flex', flexFlow: 'wrap', gap: '5px', marginTop: '5px' }}>
                         {Object.keys(cs.playerSupply).map(id => (
                             <Card
@@ -164,14 +174,16 @@ export default function CombatScreen({ onFinish, enemyData }) {
                         Acts: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
-                        {canReloadFocus && (
-                            <button onClick={actions.playFocusReload} style={{ marginRight: '10px', background: 'cyan', color: 'black' }}>
-                                Redraw Focus
-                            </button>
+                        {canReloadFocus && isTechniquePhase && (
+                            <React.Fragment>
+                                <button onClick={actions.playFocusReload} style={{ marginRight: '10px', background: 'cyan', color: 'black' }}>
+                                    Discard All Focus And Draw {cs.hand.filter(c => c === 'focus').length} New Cards
+                                </button>
+                            </React.Fragment>
                         )}
                         {isTechniquePhase && (
                             <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#000', color: 'white' }}>
-                                To Channel &rarr;
+                                Pass To Channel Phase &rarr;
                             </button>
                         )}
                         {isChannelPhase && (
@@ -182,7 +194,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', flex: 1, gap: '10px', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', flex: 2, gap: '10px', overflow: 'hidden', flexFlow: 'wrap' }}>
                     {/* Played Cards */}
                     <div style={{ width: '150px', background: '#2a2a2a', borderRadius: '4px', padding: '5px', overflowY: 'auto' }}>
                         <small>Played</small>
@@ -197,6 +209,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
 
                     {/* Hand */}
                     <div style={{ flex: 1, background: '#1a1a1a', borderRadius: '4px', padding: '10px', display: 'flex', gap: '5px', overflowX: 'auto' }}>
+                        <small style={{ width: '100%' }}>Your Hand</small>
                         {cs.hand.map((id, i) => {
                             const def = TECHNIQUES.find(t => t.id === id);
                             const isTech = def?.type === CARD_TYPES.TECHNIQUE;

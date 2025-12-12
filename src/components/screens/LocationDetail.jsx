@@ -79,7 +79,7 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
                                     if (learnable.length === 0) return <span style={{ color: '#777' }}> None (All known)</span>;
 
                                     return (
-                                        <span style={{ color: 'cyan' }}>
+                                        <span style={{ color: 'cyan', marginLeft: '5px' }}>
                                             {learnable.map((id, idx) => (
                                                 <React.Fragment key={idx}>
                                                     {idx > 0 && ", "}

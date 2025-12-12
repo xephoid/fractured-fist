@@ -179,7 +179,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         if (effects.defense) setDefense(p => p + effects.defense);
         if (effects.damage) setDamageDealt(p => p + effects.damage);
         if (effects.channels) setChannels(p => p + effects.channels); // Channel Limit Rule
-        if (effects.heal) setPlayerStamina(p => p + effects.heal);
+        if (effects.heal) setPlayerStamina(p => Math.min(p + effects.heal, playerStats.stamina));
 
         if (def.value) setSpirit(p => p + def.value);
 
