@@ -80,7 +80,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         // Note: Rules say Species modifiers apply to Player only? Or Enemy too?
         // Unmoored rule says "Opponent starts with 2 addl Missteps".
         if (species === 'Unmoored') {
-            enemyStarter.push('misstep', 'misstep');
+            enemyStarter.push('misstep', 'misstep', 'misstep', 'misstep');
         }
         const eShuffled = shuffle(enemyStarter);
         setEnemyDeck(eShuffled.slice(5)); // Enemy always draws 5? Yes standard rules apply to enemy.

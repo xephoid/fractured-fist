@@ -43,7 +43,7 @@ export const generateChampion = (tier, factionId) => {
             ];
             break;
         case 2:
-            staminaBonus = 3;
+            staminaBonus = 5;
             nameTitle = "Adept";
             // 2 Starter + 2 General + 2 Faction
             loadout = [
@@ -53,7 +53,7 @@ export const generateChampion = (tier, factionId) => {
             ];
             break;
         case 3:
-            staminaBonus = 5;
+            staminaBonus = 10;
             nameTitle = "Master";
             // 3 General + 3 Faction
             loadout = [

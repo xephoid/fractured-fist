@@ -144,7 +144,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
             {/* Middle: Log & Supply */}
             <div style={{ flex: 2, display: 'flex', borderBottom: '1px solid #444' }}>
                 {/* Log */}
-                <div style={{ width: '200px', borderRight: '1px solid #333', overflowY: 'auto', fontSize: '11px', padding: '5px', color: '#ccc' }}>
+                <div style={{ width: '200px', height: '310px', borderRight: '1px solid #333', overflowY: 'scroll', fontSize: '11px', padding: '5px', color: '#ccc' }}>
                     {cs.log.slice().reverse().map((l, i) => <LogLine key={i} text={l} />)}
                 </div>
 
@@ -208,7 +208,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
                     </div>
 
                     {/* Hand */}
-                    <div style={{ flex: 1, background: '#1a1a1a', borderRadius: '4px', padding: '10px', display: 'flex', gap: '5px', overflowX: 'auto' }}>
+                    <div style={{ flex: 1, background: '#1a1a1a', borderRadius: '4px', padding: '10px', display: 'flex', gap: '5px', overflowX: 'auto', flexWrap: 'wrap' }}>
                         <small style={{ width: '100%' }}>Your Hand</small>
                         {cs.hand.map((id, i) => {
                             const def = TECHNIQUES.find(t => t.id === id);
