@@ -14,8 +14,8 @@ export const LOCATIONS = [
         id: 'undercroft',
         name: 'The Undercroft',
         type: 'HOME_BASE',
-        owner: FACTION_IDS.NEON_DRAGONS,
-        description: "Neon Dragons home base (Underground city).",
+        owner: FACTION_IDS.UNCOUNTED,
+        description: "Uncounted home base (Underground city).",
         x: 80, y: 80,
     },
     {
@@ -39,7 +39,7 @@ export const LOCATIONS = [
         id: 'apex_city',
         name: 'Apex City',
         type: 'CONTESTED',
-        possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.NEON_DRAGONS], // Default pair, randomized in game
+        possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.UNCOUNTED], // Default pair, randomized in game
         description: "Human capital, massive metropolis.",
         x: 50, y: 50,
     },
@@ -55,7 +55,7 @@ export const LOCATIONS = [
         id: 'glasslands',
         name: 'The Glasslands',
         type: 'CONTESTED',
-        possibleFactions: [FACTION_IDS.NEON_DRAGONS, FACTION_IDS.THE_AWAKENED],
+        possibleFactions: [FACTION_IDS.UNCOUNTED, FACTION_IDS.THE_AWAKENED],
         description: "Desert Fracture Zone where sand turned to glass.",
         x: 30, y: 70,
     },
@@ -63,7 +63,7 @@ export const LOCATIONS = [
         id: 'port_meridian',
         name: 'Port Meridian',
         type: 'CONTESTED',
-        possibleFactions: [FACTION_IDS.TITAN_ENTERTAINMENT, FACTION_IDS.NEON_DRAGONS],
+        possibleFactions: [FACTION_IDS.TITAN_ENTERTAINMENT, FACTION_IDS.UNCOUNTED],
         description: "Coastal trading city, neutral ground.",
         x: 50, y: 30, // Adjusted layout
     },

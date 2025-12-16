@@ -32,7 +32,7 @@ const initialState = {
         locations: initialLocations,
         factions: {
             [FACTION_IDS.MASTERS_CIRCLE]: { standing: 0, name: "The Masters' Circle" },
-            [FACTION_IDS.NEON_DRAGONS]: { standing: 0, name: "The Neon Dragons" },
+            [FACTION_IDS.UNCOUNTED]: { standing: 0, name: "Uncounted" },
             [FACTION_IDS.TITAN_ENTERTAINMENT]: { standing: 0, name: "Titan Entertainment" },
             [FACTION_IDS.THE_AWAKENED]: { standing: 0, name: "The Awakened" },
         },

@@ -1,4 +1,4 @@
-# Fist & Form - Campaign Mode Design Document
+# Fractured Fist - Campaign Mode Design Document
 
 ## Overview
 Solo campaign mode where players travel to different locations, challenge trainers, learn new techniques, and navigate faction politics.
@@ -209,11 +209,11 @@ See "End of Fight Sequence" below
 
 **Faction Dynamics**:
 - Natural Ally: The Awakened (both value discipline and mastery)
-- Natural Rival: The Neon Dragons (honor vs pragmatism), Titan Entertainment (tradition vs commercialization)
+- Natural Rival: The Uncounted (honor vs pragmatism), Titan Entertainment (tradition vs commercialization)
 
 ---
 
-### 2. The Neon Dragons
+### 2. The Uncounted
 **Philosophy**: Survive and thrive in the streets, loyalty to the crew, pragmatic fighting
 
 **Aesthetic**: Urban gang culture, neon-lit back alleys, street wear, tattoos
@@ -246,7 +246,7 @@ See "End of Fight Sequence" below
 **What Angers Them**: Boring fights, refusing sponsorships, anti-corporate sentiment
 
 **Faction Dynamics**:
-- Natural Ally: The Neon Dragons (pragmatic, results-oriented)
+- Natural Ally: The Uncounted (pragmatic, results-oriented)
 - Natural Rival: The Awakened (spectacle vs spirituality), The Masters' Circle (tradition vs commercialization)
 
 ---
@@ -313,7 +313,7 @@ See "End of Fight Sequence" below
 
 ---
 
-### The Neon Dragons Techniques (4/4 - COMPLETE)
+### The Uncounted Techniques (4/4 - COMPLETE)
 
 1. **Impose Pressure** - 5 spirit. Draw 1 card, gain 2 more spirit, and channel 1 additional card during Channel Phase.
 2. **Leg Sweep** - 5 spirit. Deal 1 damage during strike resolution and add 2 Misstep cards to opponent's discard pile.
@@ -368,7 +368,7 @@ Each background includes:
 
 ---
 
-### 1. The Oath-Keeper (Masters' Circle + Neon Dragons)
+### 1. The Oath-Keeper (Masters' Circle + Uncounted)
 
 **Ideal**: Honor through Loyalty
 
@@ -378,7 +378,7 @@ Each background includes:
 
 **Milestone 1** (Upon reaching Level 2):
 - **"The Reminder"** - Someone from your past appears and reminds you of the oath you broke. They demand you make amends.
-- **Choice**: Commit to honoring traditional codes (Masters' Circle +1) OR acknowledge that survival required breaking it (Neon Dragons +1)
+- **Choice**: Commit to honoring traditional codes (Masters' Circle +1) OR acknowledge that survival required breaking it (Uncounted +1)
 
 **Milestone 2** (Upon reaching Level 3):
 - **"The Test"** - The person/principle you swore to protect is threatened again. You must choose how to act.
@@ -387,8 +387,8 @@ Each background includes:
 **Milestone 3** (Upon reaching Level 4):
 - **"The Reckoning"** - Final confrontation with the consequences of your broken oath.
 - **Major Choice**: 
-  - Fully embrace traditional honor (Masters' Circle +2, Neon Dragons -2)
-  - Fully embrace street loyalty (Neon Dragons +2, Masters' Circle -2)
+  - Fully embrace traditional honor (Masters' Circle +2, Uncounted -2)
+  - Fully embrace street loyalty (Uncounted +2, Masters' Circle -2)
   - Find balance - both matter in different contexts (Both factions +1)
 
 ---
@@ -440,7 +440,7 @@ Each background includes:
 
 ---
 
-### 4. The Ambitious Outsider (Neon Dragons + Titan Entertainment)
+### 4. The Ambitious Outsider (Uncounted + Titan Entertainment)
 
 **Ideal**: Power through Determination
 
@@ -449,8 +449,8 @@ Each background includes:
 **Tension**: Street power vs corporate power - which ladder do you climb?
 
 **Milestone 1** (Upon reaching Level 2):
-- **"The Opportunity"** - Both Neon Dragons and Titan Entertainment notice your talent and offer you a path up.
-- **Choice**: Join the crew (Neon Dragons +1) or sign the contract (Titan Entertainment +1)
+- **"The Opportunity"** - Both Uncounted and Titan Entertainment notice your talent and offer you a path up.
+- **Choice**: Join the crew (Uncounted +1) or sign the contract (Titan Entertainment +1)
 
 **Milestone 2** (Upon reaching Level 3):
 - **"The Price"** - Your chosen path demands something that compromises the other.
@@ -465,7 +465,7 @@ Each background includes:
 
 ---
 
-### 5. The Exile (Neon Dragons + The Awakened)
+### 5. The Exile (Uncounted + The Awakened)
 
 **Ideal**: Freedom through Rejection
 
@@ -476,7 +476,7 @@ Each background includes:
 **Milestone 1** (Upon reaching Level 2):
 - **"The Past Calls"** - Someone from the place/group that exiled you tracks you down.
 - **Revelation**: Learn why you were really cast out (or why you really left)
-- **Choice**: Embrace your exile as freedom (The Awakened +1) or plot revenge/return (Neon Dragons +1)
+- **Choice**: Embrace your exile as freedom (The Awakened +1) or plot revenge/return (Uncounted +1)
 
 **Milestone 2** (Upon reaching Level 3):
 - **"The Invitation"** - You're offered a chance to return/reconcile with your past.
@@ -572,7 +572,7 @@ At the start of a campaign, players choose which species they are playing. This 
 
 **Faction Home Bases:**
 1. **The Sanctum Peaks** - Masters' Circle home base (Mountain monastery, traditional training halls)
-2. **The Undercroft** - Neon Dragons home base (Underground city, abandoned subway fight clubs)
+2. **The Undercroft** - Uncounted home base (Underground city, abandoned subway fight clubs)
 3. **Prism Arena** - Titan Entertainment home base (Entertainment district, massive stadium complex)
 4. **Fracture Valley** - The Awakened home base (Major Fracture Zone, temples studying dimensional energy)
 
@@ -587,11 +587,11 @@ At the start of a campaign, players choose which species they are playing. This 
 - One faction's home base is randomly selected to become contested (paired with a rival faction)
 - The other 3 factions keep their home bases as controlled locations
 - The 5 naturally contested locations get random faction pairings from these combinations:
-  1. Masters' Circle vs Neon Dragons
+  1. Masters' Circle vs Uncounted
   2. Masters' Circle vs Titan Entertainment
   3. Masters' Circle vs The Awakened
-  4. Neon Dragons vs Titan Entertainment
-  5. Neon Dragons vs The Awakened
+  4. Uncounted vs Titan Entertainment
+  5. Uncounted vs The Awakened
   6. Titan Entertainment vs The Awakened
 
 **Result:**
@@ -732,7 +732,7 @@ Faction standing ranges from **-4 to +4** for a total of 9 levels:
 - **"Face the Council"** - A Master challenges you to a duel. Win dishonorably (using techniques that add Missteps) and fall to -4. Lose honorably and recover to -2. Win honorably and return to 0.
 - High stakes choice about what kind of fighter you are
 
-### The Neon Dragons Quests
+### The Uncounted Quests
 
 **+1 → +2 (Proving Loyalty):**
 - **"The Job"** - Help the crew by defeating a rival gang's champion at a specific location (location chosen by quest, not player optimization)
@@ -747,7 +747,7 @@ Faction standing ranges from **-4 to +4** for a total of 9 levels:
 - Choice: Take the deal (fall to -2) or refuse it (stay at -1)
 
 **-3 → -4 or back to -2:**
-- **"The Gauntlet"** - Face three Neon Dragons champions back-to-back with no healing between fights
+- **"The Gauntlet"** - Face three Uncounted champions back-to-back with no healing between fights
 - Win all three to recover to -2, lose any fight and fall to -4
 
 ### Titan Entertainment Quests
@@ -815,7 +815,7 @@ Faction standing ranges from **-4 to +4** for a total of 9 levels:
 - Can refine 1 additional card per fight for free (beyond what techniques allow)
 - Represents perfecting your form through their teachings
 
-**The Neon Dragons:**
+**The Uncounted:**
 - Start each fight with opponent having +1 Misstep in their starting deck (8 Focus, 4 Missteps total)
 - Your crew sabotages opponents and spreads rumors about them
 
@@ -852,7 +852,7 @@ Each finale adapts to the player's collection, faction standings, and choices th
 
 **Adaptive Setup:**
 - Determine "honor path" = Masters' Circle standing
-- Determine "loyalty path" = Neon Dragons standing  
+- Determine "loyalty path" = Uncounted standing  
 - Use whichever faction standing is higher (player chooses if equal)
 
 **Challenge:**
@@ -860,7 +860,7 @@ Each finale adapts to the player's collection, faction standings, and choices th
 - Part 2: Win without using techniques from the opposing path's faction
 - Part 3: Win a final fight that tests your chosen philosophy:
   - If Masters' Circle: Cannot use techniques that add Missteps to opponent
-  - If Neon Dragons: Must add at least 2 Missteps to opponent during the fight
+  - If Uncounted: Must add at least 2 Missteps to opponent during the fight
 
 ---
 
@@ -895,7 +895,7 @@ Each finale adapts to the player's collection, faction standings, and choices th
 **Theme**: Prove your power and dominance
 
 **Adaptive Setup:**
-- Use player's highest faction standing between Neon Dragons and Titan Entertainment
+- Use player's highest faction standing between Uncounted and Titan Entertainment
 - If both equal, player chooses
 
 **Challenge:**
@@ -977,7 +977,7 @@ Upon completing your background's finale challenge:
 - **Masters' Circle**: 28-29 points (avg 7-7.25 per card) - HIGHEST
 - **The Awakened**: 26.5 points (avg 6.6 per card)
 - **Titan Entertainment**: 26 points (avg 6.5 per card)
-- **Neon Dragons**: 25 points (avg 6.25 per card) - LOWEST
+- **Uncounted**: 25 points (avg 6.25 per card) - LOWEST
 
 ### Cards Flagged for Review
 
@@ -1001,7 +1001,7 @@ Upon completing your background's finale challenge:
 
 ### Balance Goals
 - Target: All factions within 3-4 total points of each other
-- After suggested fixes: Masters' Circle (28-29), Titan Entertainment (27.5), Neon Dragons (25), The Awakened (24.5)
+- After suggested fixes: Masters' Circle (28-29), Titan Entertainment (27.5), Uncounted (25), The Awakened (24.5)
 
 ---
 

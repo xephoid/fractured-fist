@@ -59,8 +59,8 @@ export const generateChampion = (tier, factionId) => {
             nameTitle = "Master";
             // 3 General + 3 Faction
             loadout = [
-                'jab',
-                ...getRandom(generals, 3),
+                'flying_kick',
+                ...getRandom(generals.filter(g => g !== 'flying_kick'), 3),
                 ...(factionId ? getRandom(factionCards, 3) : getRandom(generals, 3))
             ];
             break;

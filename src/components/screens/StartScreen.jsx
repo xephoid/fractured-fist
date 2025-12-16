@@ -37,7 +37,7 @@ export default function StartScreen({ onStart }) {
                 </div>
             )}
 
-            <h1>Fist & Form</h1>
+            <h1>Fractured Fist</h1>
             <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}>
                 <label>
                     Name:
