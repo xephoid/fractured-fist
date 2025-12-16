@@ -12,6 +12,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection }) {
         <div className="screen container">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h1>World Map</h1>
+                <small>Click on a location to see who is available to challenge there.</small>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <button onClick={onOpenCollection}>Manage Techniques</button>
                     <div>

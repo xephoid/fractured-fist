@@ -104,7 +104,7 @@ function App() {
         <>
             {view === 'START' && <StartScreen onStart={handleStart} />}
             {view === 'MAP' && <WorldMap onSelectLocation={handleSelectLocation} onOpenCollection={handleOpenCollection} />}
-            {view === 'LOCATION' && <LocationDetail locationId={activeLocation} onBack={() => setView('MAP')} onFight={handleFight} onOpenCollection={handleOpenCollection} />}
+            {view === 'LOCATION' && <LocationDetail locationId={activeLocation} onBack={() => { setActiveLocation(null); setView('MAP') }} onFight={handleFight} onOpenCollection={handleOpenCollection} />}
             {view === 'COMBAT' && <CombatScreen enemyData={activeEnemy} onFinish={handleCombatFinish} />}
             {view === 'COLLECTION' && <CollectionScreen onBack={() => activeLocation ? setView('LOCATION') : setView('MAP')} />}
             {view === 'REWARD' && <RewardScreen rewardOptions={rewardOptions} onSelect={handleSelectReward} onSkip={() => setView('LOCATION')} />}
