@@ -31,7 +31,6 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     // Species Logic
     const species = playerStats.species;
     const handSize = species === 'Grankiki' ? 6 : 5;
-    const isUnmoored = species === 'Unmoored';
 
     // --- Player State ---
     const [playerStamina, setPlayerStamina] = useState(playerStats.stamina || 10);
@@ -136,21 +135,26 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             return;
         }
         // Discard all Focus
-        const newHand = [];
         const discardedCount = hand.filter(id => id === 'focus').length;
         const keptCards = hand.filter(id => id !== 'focus');
 
         if (discardedCount === 0) return;
 
-        setDiscard(d => [...d, ...Array(discardedCount).fill('focus')]);
-
         // Redraw that many
-        const res = drawCardsRef(discardedCount, deck, discard, keptCards);
+        const res = drawCardsRef(discardedCount, deck, [...discard, ...Array(discardedCount).fill('focus')], keptCards);
         setDeck(res.deck);
         setDiscard(res.discard);
         setHand(res.hand);
 
         addLog(`Focus Ability: Redrew ${discardedCount} cards.`);
+    };
+
+    const playAllResources = () => {
+        const toSpend = hand.filter(id => TECHNIQUES.find(t => t.id === id)?.type === CARD_TYPES.RESOURCE);
+        const toKeep = hand.filter(id => TECHNIQUES.find(t => t.id === id)?.type !== CARD_TYPES.RESOURCE);
+
+        toSpend.forEach(id => playCard(id, false));
+        setHand(toKeep);
     };
 
     const playCard = (cardId, index) => {
@@ -170,7 +174,11 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
 
         // Remove from hand immediately
         const newHand = [...hand];
-        newHand.splice(index, 1);
+        if (!index) {
+            newHand.splice(newHand.findIndex(id => id === cardId), 1);
+        } else {
+            newHand.splice(index, 1);
+        }
 
         // Effects
         const effects = def.effects || {};
@@ -377,7 +385,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
                 addLog(`Enemy sent ${def.effects.add_misstep} Missteps!`);
             }
             if (def.effects?.heal) {
-                setEnemyStamina(s => s + def.effects.heal);
+                setEnemyStamina(s => Math.min(s + def.effects.heal, enemyData.maxStamina));
                 addLog(`Enemy healed ${def.effects.heal} HP.`);
             }
             if (def.effects?.refine) {
@@ -432,11 +440,11 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
                 const c = TECHNIQUES.find(t => t.id === id);
                 return sum + (c?.value || c?.effects?.spirit || 0);
             }, 0) / (cardsAvailable.length || 1);
-            const aiStrategy = maxLoadoutCost > (avgResourceValue * 5) ? 'RAMP' : 'AGGRO';
+            const aiStrategy = maxLoadoutCost > (avgResourceValue * 6) ? 'RAMP' : 'AGGRO';
 
             console.log('AI Strategy:', aiStrategy);
             console.log('Max Loadout Cost:', maxLoadoutCost);
-            console.log('Average Resource Value:', avgResourceValue * 5);
+            console.log('Average Resource Value:', avgResourceValue * 6);
 
             const getBuyScore = (def) => {
                 let score = def.cost || 0;
@@ -566,6 +574,6 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             enemyStamina, enemyDeck, enemyHand, enemyDefense, enemyDamage,
             enemyLastPlayed, enemyLastBought
         },
-        actions: { playCard, buyCard, advancePhase, endPlayerTurn, refineCard, skipRefine, playFocusReload }
+        actions: { playCard, buyCard, advancePhase, endPlayerTurn, refineCard, skipRefine, playFocusReload, playAllResources }
     };
 }

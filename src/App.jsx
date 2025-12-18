@@ -8,7 +8,7 @@ import LocationDetail from './components/screens/LocationDetail';
 import CollectionScreen from './components/screens/CollectionScreen';
 import RewardScreen from './components/screens/RewardScreen';
 import DefeatScreen from './components/screens/DefeatScreen';
-import { TECHNIQUES } from './data/techniques';
+import { tierValues } from './data';
 
 function App() {
     const { state, dispatch } = useCampaign();
@@ -47,10 +47,9 @@ function App() {
         if (won) {
             // Calculate Rewards
             const tier = activeEnemy?.tier || 1;
-            const xpMap = { 1: 1, 2: 2, 3: 3 };
             const creditMap = { 1: 50, 2: 100, 3: 150 };
 
-            const xp = xpMap[tier] || 1;
+            const xp = tierValues[tier] || 1;
             const credits = creditMap[tier] || 50;
 
             dispatch({ type: 'GAIN_XP', payload: xp });
@@ -100,10 +99,15 @@ function App() {
         setView('COLLECTION');
     };
 
+    const handleResetGame = () => {
+        dispatch({ type: 'RESET_GAME' });
+        setView('START');
+    };
+
     return (
         <>
             {view === 'START' && <StartScreen onStart={handleStart} />}
-            {view === 'MAP' && <WorldMap onSelectLocation={handleSelectLocation} onOpenCollection={handleOpenCollection} />}
+            {view === 'MAP' && <WorldMap onSelectLocation={handleSelectLocation} onOpenCollection={handleOpenCollection} onResetGame={handleResetGame} />}
             {view === 'LOCATION' && <LocationDetail locationId={activeLocation} onBack={() => { setActiveLocation(null); setView('MAP') }} onFight={handleFight} onOpenCollection={handleOpenCollection} />}
             {view === 'COMBAT' && <CombatScreen enemyData={activeEnemy} onFinish={handleCombatFinish} />}
             {view === 'COLLECTION' && <CollectionScreen onBack={() => activeLocation ? setView('LOCATION') : setView('MAP')} />}

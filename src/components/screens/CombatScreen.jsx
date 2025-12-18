@@ -52,7 +52,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
 
     // Focus Catchup Condition
     const canReloadFocus = cs.hand.some(id => id === 'focus') && cs.playerStamina < cs.enemyStamina;
-
+    const canPlayAllResources = cs.hand.some(id => TECHNIQUES.find(c => c.id === id).type === CARD_TYPES.RESOURCE);
     return (
         <div className="screen container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
 
@@ -83,12 +83,12 @@ export default function CombatScreen({ onFinish, enemyData }) {
             <div style={{ flex: 1, borderBottom: '1px solid #444', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h3 style={{ margin: 0 }}>{enemy.name}</h3>
-                    <div>HP: {cs.enemyStamina}</div>
+                    <div>Stamina: {cs.enemyStamina}</div>
                     <div style={{ fontSize: '12px', color: '#aaa' }}>
                         Deck: {cs.enemyDeck.length} | Hand: {cs.enemyHand.length}
                     </div>
                     <div>
-                        <strong>Def: {cs.enemyDefense}</strong> | <span style={{ color: 'orange' }}>Inc Dmg: {cs.enemyDamage}</span>
+                        <strong>Def: {cs.enemyDefense}</strong> | <span style={{ color: 'orange' }}>Dmg: {cs.enemyDamage}</span>
                     </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
@@ -158,7 +158,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
                                 cardId={id}
                                 count={cs.playerSupply[id]}
                                 showCost
-                                disabled={!isChannelPhase || cs.spirit < (TECHNIQUES.find(t => t.id === id)?.cost || 0) || cs.channels < 1}
+                                disabled={!isChannelPhase || cs.spirit < (TECHNIQUES.find(t => t.id === id)?.cost || 0) || cs.channels < 1 || cs.playerSupply[id] < 1}
                                 onClick={() => actions.buyCard(id)}
                             />
                         ))}
@@ -170,17 +170,11 @@ export default function CombatScreen({ onFinish, enemyData }) {
             <div style={{ flex: 3, padding: '10px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <div>
-                        <strong>HP: {cs.playerStamina}</strong> |
+                        <h3 style={{ margin: 0 }}>{state.player.name} Level {state.player.level} {state.player.species}</h3>
+                        <strong>Stamina: {cs.playerStamina}</strong> |
                         Acts: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
-                        {canReloadFocus && isTechniquePhase && (
-                            <React.Fragment>
-                                <button onClick={actions.playFocusReload} style={{ marginRight: '10px', background: 'cyan', color: 'black' }}>
-                                    Discard All Focus And Draw {cs.hand.filter(c => c === 'focus').length} New Cards
-                                </button>
-                            </React.Fragment>
-                        )}
                         {isTechniquePhase && (
                             <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#000', color: 'white' }}>
                                 Pass To Channel Phase &rarr;
@@ -225,6 +219,20 @@ export default function CombatScreen({ onFinish, enemyData }) {
                                 />
                             );
                         })}
+                        {canReloadFocus && isTechniquePhase && (
+                            <div style={{ width: '100px', height: '130px' }}>
+                                <button onClick={actions.playFocusReload} style={{ marginRight: '10px', background: 'black', color: 'white' }}>
+                                    Discard All Focus And Draw {cs.hand.filter(c => c === 'focus').length} New Cards
+                                </button>
+                            </div>
+                        )}
+                        {isChannelPhase && canPlayAllResources && (
+                            <div style={{ width: '100px', height: '130px' }}>
+                                <button onClick={() => actions.playAllResources()} style={{ marginRight: '10px', background: 'black', color: 'white' }}>
+                                    Spend All Spirit
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div style={{ fontSize: '10px', color: '#555', marginTop: '2px' }}>Deck: {cs.deck.length} | Discard: {cs.discard.length}</div>

@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { api } from '../services/api';
 import { LOCATIONS } from '../data/locations';
 import { FACTION_IDS } from '../data/factions';
+import { levelThresholds } from '../data';
 
 const CampaignContext = createContext();
 
@@ -51,7 +52,7 @@ function campaignReducer(state, action) {
         case 'SET_PLAYER_SPECIES':
             // logic to set stamina based on species
             let stamina = 7;
-            if (action.payload === 'Grankiki') stamina = 5;
+            if (action.payload === 'Grankiki') stamina = 4;
             if (action.payload === 'Unmoored') stamina = 6;
             if (action.payload === 'Bouaux') stamina = 10;
 
@@ -67,6 +68,11 @@ function campaignReducer(state, action) {
                     collection: starterCards,
                     loadout: starterCards
                 },
+            };
+        case 'SET_PLAYER_NAME':
+            return {
+                ...state,
+                player: { ...state.player, name: action.payload }
             };
         case 'SET_LOADOUT':
             return {
@@ -104,10 +110,8 @@ function campaignReducer(state, action) {
             let newStamina = state.player.stamina;
 
             // Level Thresholds
-            // 1->2: 8, 2->3: 18, 3->4: 32, 4->5: 50
-            const thresholds = { 1: 8, 2: 18, 3: 32, 4: 50 };
-
-            if (thresholds[newLevel] && newXp >= thresholds[newLevel]) {
+            // 1->2: 4, 2->3: 8, 3->4: 12, 4->5: 24
+            if (levelThresholds[newLevel] && newXp >= levelThresholds[newLevel]) {
                 newLevel++;
                 // Stamina Increases
                 const s = state.player.species;
@@ -135,6 +139,8 @@ function campaignReducer(state, action) {
                 ...state,
                 player: { ...state.player, collection: [...state.player.collection, newTech] }
             };
+        case 'RESET_GAME':
+            return { ...initialState, loading: false };
         default:
             return state;
     }
@@ -156,6 +162,10 @@ export function CampaignProvider({ children }) {
     }, []);
 
     const value = { state, dispatch };
+
+    if (!state.loading) {
+        api.saveGameState(state);
+    }
 
     return (
         <CampaignContext.Provider value={value}>

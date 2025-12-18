@@ -3,8 +3,8 @@ import { useCampaign } from '../../context/CampaignContext';
 import { LOCATIONS } from '../../data/locations';
 import { generateChampion } from '../../services/championGenerator';
 import { FACTION_IDS } from '../../data/factions';
-import { TECHNIQUES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
+import { tierValues, levelThresholds } from '../../data';
 
 export default function LocationDetail({ locationId, onBack, onFight, onOpenCollection }) {
     const { state } = useCampaign();
@@ -52,8 +52,9 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', float: 'right' }}>
                     <button onClick={onOpenCollection}>Manage Techniques</button>
                     <div>
-                        <div>Lvl {state.player.level} {state.player.species}</div>
-                        <div>{state.player.credits} Credits</div>
+                        <div>{state.player.name}</div>
+                        <div>Level {state.player.level} {state.player.species}</div>
+                        <div>{state.player.xp}/{levelThresholds[state.player.level]} XP</div>
                     </div>
                 </div>
                 <h1>{loc.name}</h1>
@@ -69,7 +70,7 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
                             <div style={{ fontWeight: 'bold', fontSize: '18px', color: champ.tier === 3 ? 'gold' : champ.tier === 2 ? 'silver' : 'white' }}>
                                 {champ.name}
                             </div>
-                            <div style={{ color: '#aaa' }}>Tier {champ.tier} | HP: {champ.stamina}</div>
+                            <div style={{ color: '#aaa' }}>Tier {champ.tier} | HP: {champ.stamina} | XP: {tierValues[champ.tier]} </div>
 
                             {/* Learnable Techniques Preview */}
                             <div style={{ marginTop: '5px', fontSize: '12px', color: '#8f8' }}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import { LOCATIONS } from '../../data/locations';
-
+import { levelThresholds } from '../../data';
 import { FACTIONS } from '../../data/factions';
 
-export default function WorldMap({ onSelectLocation, onOpenCollection }) {
+export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGame }) {
     const { state } = useCampaign();
     const { locations } = state.world;
 
@@ -16,8 +16,9 @@ export default function WorldMap({ onSelectLocation, onOpenCollection }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <button onClick={onOpenCollection}>Manage Techniques</button>
                     <div>
-                        <div>Lvl {state.player.level} {state.player.species}</div>
-                        <div>{state.player.credits} Credits</div>
+                        <div>{state.player.name}</div>
+                        <div>Level {state.player.level} {state.player.species}</div>
+                        <div>{state.player.xp}/{levelThresholds[state.player.level]} XP</div>
                     </div>
                 </div>
             </header>
@@ -71,7 +72,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection }) {
                 })}
             </div>
 
-            <div style={{ marginTop: '20px', display: 'flex', gap: '20px' }}>
+            <div style={{ marginTop: '20px', display: 'flex', gap: '20px', justifyContent: 'space-between' }}>
                 {Object.values(state.world.factions).map(f => ( // Fix: state.world.factions is object, map over values or keys
                     // Wait, I stored it as object in Context.
                     // Need to match keys.
@@ -95,6 +96,9 @@ export default function WorldMap({ onSelectLocation, onOpenCollection }) {
                         </div>
                     )
                 })}
+                <div>
+                    <button style={{ color: 'red', border: '1px solid red' }} onClick={onResetGame}>New Game</button>
+                </div>
             </div>
         </div>
     );

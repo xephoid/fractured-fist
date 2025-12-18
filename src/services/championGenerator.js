@@ -79,6 +79,7 @@ export const generateChampion = (tier, factionId) => {
         tier,
         factionId,
         stamina: baseStamina + staminaBonus,
+        maxStamina: baseStamina + staminaBonus,
         loadout,
         // Potential for rewards tracking here
     };

@@ -8,6 +8,7 @@ export default function StartScreen({ onStart }) {
     const [showRules, setShowRules] = useState(false);
 
     const handleStart = () => {
+        dispatch({ type: 'SET_PLAYER_NAME', payload: name });
         dispatch({ type: 'SET_PLAYER_SPECIES', payload: species });
         onStart();
     };
@@ -24,13 +25,15 @@ export default function StartScreen({ onStart }) {
                         <h2 style={{ color: 'gold', marginTop: 0 }}>Rules of Engagement</h2>
                         <ul style={{ lineHeight: '1.6', color: '#ddd' }}>
                             <li><strong>Goal:</strong> Reduce opponent's Stamina to 0.</li>
-                            <li><strong>Phase 1: Technique</strong> - Play attack & utility cards. You start with 1 Action.</li>
-                            <li><strong>Phase 2: Channel</strong> - Spend Spirit to buy new cards. You start with 1 Channel (Buy).</li>
+                            <li><strong>Difficulty:</strong> Adjusted based on species.</li>
+                            <li><strong>Each turn has three phases:</strong></li>
+                            <li><strong>Phase 1: Technique</strong> - Draw 5 cards, then play <span style={{ color: 'cyan' }}>technique</span> cards which have various effects. One card per turn, unless otherwise specified.</li>
+                            <li><strong>Phase 2: Channel</strong> - Spend <span style={{ color: 'yellow' }}>spirit</span> (Focus, Momentum, Mastery) to buy new cards. You start with 1 Channel (Buy).</li>
                             <li><strong>Phase 3: Cleanup</strong> - Discard your hand and draw 5 new cards.</li>
-                            <li><strong>Resolution:</strong> Damage and Defense are calculated simultaneously.</li>
-                            <li><strong>Refining:</strong> Specialized cards like <em>Assess</em> allow you to "Refine" (Trash) weak cards permanently.</li>
+                            <li><strong>Resolution:</strong> Damage and Defense are calculated simultaneously after both players have played their cards.</li>
+                            <li><strong>Refining:</strong> Specialized cards like <span style={{ color: 'cyan' }}>Assess</span> allow you to "Refine" (Trash) weak cards permanently.</li>
                             <li><strong>Missteps:</strong> Useless clutter cards added by enemies. Refine them to clean your deck.</li>
-                            <li><strong>Catch Up:</strong> If you have less Stamina than your opponent, <em>Focus</em> cards let you discard & redraw!</li>
+                            <li><strong>Catch Up:</strong> If you have less Stamina than your opponent, you may discard all your <span style={{ color: 'yellow' }}>Focus</span> cards to draw that many new cards.</li>
                         </ul>
                         <button onClick={() => setShowRules(false)} style={{ marginTop: '20px', width: '100%', padding: '10px' }}>Got it</button>
                     </div>
@@ -46,10 +49,10 @@ export default function StartScreen({ onStart }) {
                 <label>
                     Species:
                     <select value={species} onChange={e => setSpecies(e.target.value)} style={{ width: '100%', padding: '5px', marginTop: '5px' }}>
-                        <option value="Human">Human (7 Stamina)</option>
-                        <option value="Grankiki">Grankiki (5 Stamina, Draw +1)</option>
-                        <option value="Unmoored">Unmoored (6 Stamina, Foe +4 Misstep)</option>
-                        <option value="Bouaux">Bouaux (10 Stamina)</option>
+                        <option value="Human">Human (7 Stamina) | Normal</option>
+                        <option value="Bouaux">Bouaux (10 Stamina) | Easy</option>
+                        <option value="Unmoored">Unmoored (6 Stamina, Foe +4 Misstep) | Spicy</option>
+                        <option value="Grankiki">Grankiki (4 Stamina, Draw +1) | Hard</option>
                     </select>
                 </label>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>

@@ -62,6 +62,7 @@ export default function CollectionScreen({ onBack }) {
         <div className="screen container">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0' }}>
                 <h1>Available Techniques</h1>
+                <small>Choose which techniques you will have available in a fight.</small>
                 <div>
                     <span style={{ color: selected.length === 7 ? 'lightgreen' : 'orange', marginRight: '20px' }}>
                         Selected: {selected.length} / 7

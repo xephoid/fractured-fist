@@ -10,7 +10,7 @@ export const FACTIONS = {
         id: FACTION_IDS.MASTERS_CIRCLE,
         name: "The Masters' Circle",
         description: "Preservation of traditional techniques, discipline, honor in combat.",
-        color: '#d63031', // Red
+        color: '#aaa', // Gray
         rival: FACTION_IDS.UNCOUNTED, // Simplified rival
     },
     [FACTION_IDS.UNCOUNTED]: {
