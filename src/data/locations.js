@@ -9,6 +9,7 @@ export const LOCATIONS = [
         owner: FACTION_IDS.MASTERS_CIRCLE,
         description: "Masters' Circle home base (Mountain monastery).",
         x: 20, y: 20, // Map coordinates (0-100)
+        icon: '🛕'
     },
     {
         id: 'undercroft',
@@ -17,6 +18,7 @@ export const LOCATIONS = [
         owner: FACTION_IDS.UNCOUNTED,
         description: "Uncounted home base (Underground city).",
         x: 80, y: 80,
+        icon: '🕳'
     },
     {
         id: 'prism_arena',
@@ -25,6 +27,7 @@ export const LOCATIONS = [
         owner: FACTION_IDS.TITAN_ENTERTAINMENT,
         description: "Titan Entertainment home base (Massive stadium).",
         x: 80, y: 20,
+        icon: '🏟'
     },
     {
         id: 'fracture_valley',
@@ -33,6 +36,7 @@ export const LOCATIONS = [
         owner: FACTION_IDS.THE_AWAKENED,
         description: "The Awakened home base (Dimensional energy zone).",
         x: 20, y: 80,
+        icon: '🏚'
     },
     // Contested Locations
     {
@@ -42,6 +46,7 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.UNCOUNTED], // Default pair, randomized in game
         description: "Human capital, massive metropolis.",
         x: 50, y: 50,
+        icon: '🌆'
     },
     {
         id: 'chrome_bay',
@@ -50,6 +55,7 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.TITAN_ENTERTAINMENT],
         description: "Cyberpunk island, dense urban tech district.",
         x: 70, y: 40,
+        icon: '🌉'
     },
     {
         id: 'glasslands',
@@ -58,6 +64,7 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.UNCOUNTED, FACTION_IDS.THE_AWAKENED],
         description: "Desert Fracture Zone where sand turned to glass.",
         x: 30, y: 70,
+        icon: '🏜'
     },
     {
         id: 'port_meridian',
@@ -66,6 +73,7 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.TITAN_ENTERTAINMENT, FACTION_IDS.UNCOUNTED],
         description: "Coastal trading city, neutral ground.",
         x: 50, y: 30, // Adjusted layout
+        icon: '⛴'
     },
     {
         id: 'verdant_sanctum',
@@ -74,5 +82,6 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.THE_AWAKENED],
         description: "Ancient forest with Phase Two Bouaux homes.",
         x: 30, y: 50,
+        icon: '🛖'
     },
 ];

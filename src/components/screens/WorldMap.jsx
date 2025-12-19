@@ -23,12 +23,8 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                 </div>
             </header>
 
-            <div style={{ position: 'relative', width: '100%', height: '600px', background: '#333', borderRadius: '8px', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '600px', background: 'url("/maps/map1.0.png") 0% 25% / cover', borderRadius: '8px', overflow: 'hidden' }}>
                 {LOCATIONS.map(loc => {
-                    const locState = locations[loc.id] || {};
-                    const isController = locState.controller;
-                    const color = isController ? FACTIONS[isController].color : '#999';
-
                     // Check for locked status
                     let isLocked = false;
                     if (loc.owner) {
@@ -49,7 +45,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                                 transform: 'translate(-50%, -50%)',
                                 width: '40px', height: '40px',
                                 borderRadius: '50%',
-                                background: isLocked ? '#555' : (loc.type === 'HOME_BASE' ? 'gold' : 'cyan'),
+                                background: isLocked ? '#555' : (loc.type === 'HOME_BASE' ? 'black' : 'white'),
                                 border: isLocked ? '2px solid red' : (loc.id === state.world.currentLocationId ? '3px solid white' : '2px solid black'),
                                 cursor: isLocked ? 'not-allowed' : 'pointer',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -57,7 +53,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                             }}
                             title={isLocked ? "Hostile Territory (Locked)" : loc.name}
                         >
-                            {isLocked ? '🔒' : (loc.type === 'HOME_BASE' ? '🏠' : '⚔️')}
+                            {isLocked ? '🔒' : loc.icon}
                             {/* Label name */}
                             <div style={{
                                 position: 'absolute', top: '45px',
@@ -90,6 +86,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                 })}
                 {Object.entries(state.world.factions).map(([id, data]) => {
                     const def = FACTIONS[id];
+                    if (!def) return null;
                     return (
                         <div key={id} style={{ color: def.color }}>
                             {def.name}: {data.standing}

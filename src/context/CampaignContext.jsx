@@ -107,7 +107,7 @@ function campaignReducer(state, action) {
             const { locationId, championTier } = action.payload;
             const newChampions = [...state.world.locations[locationId].champions];
             console.log("oldChampions", newChampions);
-            const championIndex = newChampions.findIndex(champ => champ.tier === championTier);
+            const championIndex = newChampions.findIndex(champ => champ?.tier === championTier);
             newChampions[championIndex] = null;
             console.log("newChampions", newChampions);
             return {
