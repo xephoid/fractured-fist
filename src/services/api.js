@@ -3,7 +3,7 @@ const STORAGE_KEY = 'fist_and_form_save_v1';
 export const api = {
     saveGameState: async (gameState) => {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
             return { success: true };
         } catch (error) {
             console.error('Save failed:', error);
@@ -13,7 +13,7 @@ export const api = {
 
     loadGameState: async () => {
         try {
-            const data = localStorage.getItem(STORAGE_KEY);
+            const data = sessionStorage.getItem(STORAGE_KEY);
             return data ? JSON.parse(data) : null;
         } catch (error) {
             console.error('Load failed:', error);
@@ -22,6 +22,6 @@ export const api = {
     },
 
     clearSave: async () => {
-        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(STORAGE_KEY);
     }
 };
