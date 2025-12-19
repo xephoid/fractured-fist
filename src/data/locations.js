@@ -18,7 +18,7 @@ export const LOCATIONS = [
         owner: FACTION_IDS.UNCOUNTED,
         description: "Uncounted home base (Underground city).",
         x: 80, y: 80,
-        icon: '🕳'
+        icon: '🚇'
     },
     {
         id: 'prism_arena',
