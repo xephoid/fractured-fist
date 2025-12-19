@@ -8,29 +8,37 @@ This is an implementation of the game "Fractured Fist" developed by Zeke Swepson
 
 ## The World
 
-One hundred years ago the world was forever change when dimensional rifts opened up across the globe called the Fracture. In addition to causing mass destruction, the rifts brought through some new sentient beings.
+One hundred years ago, dimensional rifts tore open across the globe. They called it the Fracture.
 
-The Grankiki, small insectoid creatures with heads that resemble chameleons. They are short lived, but have a high reproductive rate. It is very rare to see a lone Grankiki, as they are very social creatures.
+The rifts brought destruction—cities twisted, landscapes transformed, reality itself scarred. But they also brought something unexpected: beings from other dimensions, now stranded in our world.
 
-The Bouaux, large birdlike creatures that are long lived and go through a transformation similar to metamorphosis. In their second stage they grow extremely large and resemble dinosaurs, specifically the Brontosaurus. They are known for their intelligence and are often seen as guardians of natural resources.
+The **Grankiki** are small insectoid creatures, barely four feet tall, with heads resembling chameleons—especially the eyes, which move independently and see everything. Short-lived but numerous, they are almost never seen alone. Their pack mentality and rapid generations have made them both adaptable and formidable.
 
-The Unmoored, decidedly the strangest of the new arrivals. While they are easily perceived as humanoids, when asked to describe the appearance of an Unmoored, those not of their kind describe them as something half remembered. Like from a dream. Additionally, they do not communicate audibly, instead their intent is percived through what can best be described as "vibes".
+The **Bouaux** are long-lived bird-like beings who undergo a dramatic metamorphosis. For their first century, they are human-sized and capable of gliding. Then they transform, growing massive—resembling the ancient brontosaurus—and losing their ability to fly. In this second phase, they become living repositories of wisdom, often settling in one place for the remaining centuries of their lives.
 
-These new arrivals, now stranded, have learned to adapt to the world around them and in some places have even thrived along side humans. However, in other places they have been met with hostility and persecution. Especially the Unmoored who most humans find unsettling.
+The **Unmoored** are the strangest arrivals. You know one is present—you can sense them, feel their attention—but describing them is nearly impossible. They exist like half-remembered dreams, their forms slipping from memory even as you look at them. They don't speak; instead, their intentions arrive as what can only be described as "vibes," a direct transmission that many find deeply unsettling.
 
-Some humans blame the non-human arrivals for the destruction caused by the dimensional rifts. Others see them as a threat to their way of life. And still others see them as a new opportunity for progress and innovation. Either way the humans have been forced to adapt and over the course of 100 years a new status quo has been established.
+These newcomers, now stranded, have adapted to their new world. In some places they've thrived—Grankiki families run markets in Chrome Bay, young Bouaux glide between Apex City's towers, even a few Unmoored have found roles as couriers and information brokers. But elsewhere, they face hostility. Many humans blame them for the Fracture's destruction. Others fear them as threats. The Unmoored especially face suspicion wherever they go.
 
-One of the main forms of entertainment in this new world are the fighting tournaments. These are held in arenas and are often sponsored by powerful individuals or groups. The fighters are often paid handsomely for their participation and the winner is crowned the World Champion.
+Over the past century, a new equilibrium has emerged—not equality, but coexistence. And in this changed world, one thing has captured everyone's imagination: combat.
 
-There are four major factions that participate in the tournaments. The Master's Circle, the Uncounted, Titan Entertainment, and the Awakened. Each faction has their own unique style of fighting and their own unique way of training their fighters.
+The Fracture left more than scars and strangers. It left **Spirit energy**—a power that flows through all living things, stronger in some places than others, especially near **Fracture Zones** where reality remains thin. Those who master Spirit energy can channel it into techniques beyond normal physical limits. And those who can fight, truly fight, have become the new celebrities, warriors, and power brokers.
 
-The Master's Circle is a prestigious organization that trains the best fighters from around the world. They are known for their strict training regimen and their focus on technique.
+Four major factions dominate the fighting world:
 
-The Uncounted are an organized crime syndicate that trains their fighters in the art of street fighting. They are known for their brutality and moves that are designed to confuse and disorient their opponents.
+**The Masters' Circle** preserves traditional martial arts, refined over generations. They believe discipline and perfect technique are the path to mastery. Their fighters move with precision, every action deliberate, every form honored.
 
-Titan Entertainment is a powerful corporation that trains their fighters in the art of showmanship. They are known for their strength and moves that are designed to overwhelm their opponents.
+**The Uncounted** emerged from the streets and shadows—those who fell through society's cracks after the Fracture. They fight with pragmatic brutality, using techniques designed to confuse and overwhelm. They have no use for rules or tradition. Survival is the only honor.
 
-The Awakened are a group of monks who study the remnants of the Fracture. They have learned to channel the power of the Fracture for healing and protection.
+**Titan Entertainment** turned fighting into spectacle. This powerful corporation broadcasts matches to millions, making stars of fighters bold enough to perform. Their style emphasizes raw power and showmanship—fights that look as good as they feel, techniques that make crowds roar.
+
+**The Awakened** study the Fracture itself, seeking enlightenment through understanding the dimensional energies that changed everything. They've learned to channel Spirit energy for healing and protection, blending spirituality with combat in ways that seem almost supernatural.
+
+In arenas and underground clubs, in mountain dojos and corporate stadiums, fighters from every faction and species compete. Some seek glory. Others seek redemption. Some fight for money, others for honor.
+
+But all of them fight in the shadow of the Fracture—that moment a century ago when the world broke open and everything changed.
+
+Your journey as a fighter begins now.
 
 ## The Story
 
