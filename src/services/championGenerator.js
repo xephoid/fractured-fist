@@ -16,14 +16,14 @@ const getFactionCards = (factionId) => TECHNIQUES.filter(t => t.faction === fact
 export const generateChampion = (tier, factionId) => {
     // Stamina Base: 
     // Humans = 7. 
-    // Tier 1 (Novice) = Base.
+    // Tier 1 (Initiate) = Base.
     // Tier 2 (Adept) = Base + 3.
-    // Tier 3 (Master) = Base + 5.
+    // Tier 3 (Champion) = Base + 5.
     // For simplicity, let's assume Human/Average stamina (7) as base for enemies? 
     // Or random species? Let's stick to simple base + tier bonus for now.
     const baseStamina = 7;
     let staminaBonus = 0;
-    let nameTitle = "Novice";
+    let nameTitle = "Initiate";
 
     // Loadout Logic
     let loadout = [];
@@ -34,7 +34,7 @@ export const generateChampion = (tier, factionId) => {
     switch (tier) {
         case 1:
             staminaBonus = 0;
-            nameTitle = "Novice";
+            nameTitle = "Initiate";
             // 4 Starter + 1 General + 1 Faction
             loadout = [
                 'jab',
@@ -56,7 +56,7 @@ export const generateChampion = (tier, factionId) => {
             break;
         case 3:
             staminaBonus = 10;
-            nameTitle = "Master";
+            nameTitle = "Champion";
             // 3 General + 3 Faction
             loadout = [
                 'flying_kick',

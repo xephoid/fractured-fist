@@ -54,6 +54,7 @@ function App() {
 
             dispatch({ type: 'GAIN_XP', payload: xp });
             dispatch({ type: 'ADD_CREDITS', payload: credits });
+            dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
 
             // Faction Politics
             if (activeEnemy && activeEnemy.factionId && activeEnemy.tier >= 2) {

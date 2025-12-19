@@ -1,43 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
-import { LOCATIONS } from '../../data/locations';
-import { generateChampion } from '../../services/championGenerator';
-import { FACTION_IDS } from '../../data/factions';
 import TooltippedName from '../common/TooltippedName';
 import { tierValues, levelThresholds } from '../../data';
 
 export default function LocationDetail({ locationId, onBack, onFight, onOpenCollection }) {
     const { state } = useCampaign();
-    const loc = LOCATIONS.find(l => l.id === locationId);
+    const loc = state.world.locations[locationId];
 
     // Generate potential opponents when location loads
-    const [champions, setChampions] = useState([]);
-
-    useEffect(() => {
-        if (!loc) return;
-
-        // Determine factions present
-        // Controlled: Owner only
-        // Contested: Possible factions
-        let presentFactions = [];
-        if (loc.type === 'HOME_BASE') {
-            presentFactions = [loc.owner];
-        } else {
-            presentFactions = loc.possibleFactions || [FACTION_IDS.MASTERS_CIRCLE]; // Fallback
-        }
-
-        const generated = [];
-        // Tier 1 (Novice) - Random faction from present
-        generated.push(generateChampion(1, presentFactions[Math.floor(Math.random() * presentFactions.length)]));
-
-        // Tier 2 (Adept) - Random faction
-        generated.push(generateChampion(2, presentFactions[Math.floor(Math.random() * presentFactions.length)]));
-
-        // Tier 3 (Master) - Random faction
-        generated.push(generateChampion(3, presentFactions[Math.floor(Math.random() * presentFactions.length)]));
-
-        setChampions(generated);
-    }, [loc]);
+    const champions = loc.champions;
 
     if (!loc) return <div>Location not found.</div>;
 
@@ -65,7 +36,7 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
             <h2>Available Opponents</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 {champions.map((champ, i) => (
-                    <div key={i} style={{ border: '1px solid #555', padding: '15px', borderRadius: '8px', background: '#222', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    champ ? <div key={i} style={{ border: '1px solid #555', padding: '15px', borderRadius: '8px', background: '#222', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                             <div style={{ fontWeight: 'bold', fontSize: '18px', color: champ.tier === 3 ? 'gold' : champ.tier === 2 ? 'silver' : 'white' }}>
                                 {champ.name}
@@ -102,7 +73,15 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
                         >
                             Challenge
                         </button>
-                    </div>
+                    </div> :
+                        <div key={i} style={{ border: '1px solid #555', padding: '15px', borderRadius: '8px', background: '#222', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div>
+                                <div style={{ fontWeight: 'bold', fontSize: '18px', color: 'red' }}>
+                                    Defeated
+                                </div>
+                            </div>
+
+                        </div>
                 ))}
             </div>
         </div>

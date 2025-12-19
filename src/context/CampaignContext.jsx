@@ -3,15 +3,34 @@ import { api } from '../services/api';
 import { LOCATIONS } from '../data/locations';
 import { FACTION_IDS } from '../data/factions';
 import { levelThresholds } from '../data';
+import { generateChampion } from '../services/championGenerator';
 
 const CampaignContext = createContext();
 
 const initialLocations = {};
 LOCATIONS.forEach(loc => {
+    // Determine factions present
+    // Controlled: Owner only
+    // Contested: Possible factions
+
+    let presentFactions = [];
+    if (loc.type === 'HOME_BASE') {
+        presentFactions = [loc.owner];
+    } else {
+        presentFactions = loc.possibleFactions || [FACTION_IDS.MASTERS_CIRCLE]; // Fallback
+    }
     initialLocations[loc.id] = {
         id: loc.id,
+        name: loc.name,
+        type: loc.type,
+        possibleFactions: loc.possibleFactions,
         controller: loc.owner || null,
         locked: false,
+        champions: [
+            generateChampion(1, presentFactions[Math.floor(Math.random() * presentFactions.length)]),
+            generateChampion(2, presentFactions[Math.floor(Math.random() * presentFactions.length)]),
+            generateChampion(3, presentFactions[Math.floor(Math.random() * presentFactions.length)]),
+        ],
     };
 });
 
@@ -83,6 +102,23 @@ function campaignReducer(state, action) {
             return {
                 ...state,
                 player: { ...state.player, background: action.payload }
+            };
+        case 'DEFEAT_CHAMPION':
+            const { locationId, championTier } = action.payload;
+            const newChampions = [...state.world.locations[locationId].champions];
+            console.log("oldChampions", newChampions);
+            const championIndex = newChampions.findIndex(champ => champ.tier === championTier);
+            newChampions[championIndex] = null;
+            console.log("newChampions", newChampions);
+            return {
+                ...state,
+                world: {
+                    ...state.world,
+                    locations: {
+                        ...state.world.locations,
+                        [locationId]: { ...state.world.locations[locationId], champions: newChampions }
+                    }
+                }
             };
         case 'UPDATE_STANDING':
             const { factionKey, amount } = action.payload;
