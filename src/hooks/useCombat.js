@@ -63,6 +63,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     const [enemyDefense, setEnemyDefense] = useState(0);
     const [enemyDamage, setEnemyDamage] = useState(0); // Actual queued damage from cards
     const [enemyIntent, setEnemyIntent] = useState({ description: 'Waiting...' });
+    const [tookDamage, setTookDamage] = useState(false);
 
     // --- Init ---
     useEffect(() => {
@@ -101,6 +102,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             : ['jab', 'block', 'flying_kick']; // Fallback
 
         console.log('eLoadout', eLoadout);
+        setTookDamage(false);
 
         setEnemySupply(initSupply(eLoadout));
 
@@ -205,6 +207,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         }
 
         if (effects.refine) {
+            window.scrollTo(0, 0);
             setRefinePending(effects.refine);
             addLog(`Select ${effects.refine} card(s) to Refine.`);
         }
@@ -290,6 +293,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     // --- Actions ---
     const endPlayerTurn = () => {
         setPhase(PHASES.ENEMY_TURN);
+        window.scrollTo(0, 0);
     };
 
     // --- AI Logic ---
@@ -524,6 +528,8 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         const netPlayerDmg = Math.max(0, damageDealt - enemyDefense);
         const netEnemyDmg = Math.max(0, enemyDamage - defense);
 
+        setTookDamage(netEnemyDmg > 0);
+
         const newEH = enemyStamina - netPlayerDmg;
         const newPH = playerStamina - netEnemyDmg;
 
@@ -572,7 +578,8 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             phase, log,
             playerStamina,
             enemyStamina, enemyDeck, enemyHand, enemyDefense, enemyDamage,
-            enemyLastPlayed, enemyLastBought
+            enemyLastPlayed, enemyLastBought,
+            tookDamage
         },
         actions: { playCard, buyCard, advancePhase, endPlayerTurn, refineCard, skipRefine, playFocusReload, playAllResources }
     };

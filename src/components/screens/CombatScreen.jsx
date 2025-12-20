@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import { useCombat, PHASES } from '../../hooks/useCombat';
 import { TECHNIQUES, CARD_TYPES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 import LogLine from '../common/LogLine';
 
+const typeDisplay = {
+    [CARD_TYPES.RESOURCE]: 'SPIRIT',
+    [CARD_TYPES.MISSTEP]: 'MISSTEP',
+    [CARD_TYPES.TECHNIQUE]: 'TECHNIQUE'
+};
 // Reusable Card
 const Card = ({ cardId, onClick, disabled, count, showCost, highlight }) => {
     const def = TECHNIQUES.find(c => c.id === cardId);
@@ -31,10 +36,82 @@ const Card = ({ cardId, onClick, disabled, count, showCost, highlight }) => {
             }}
         >
             <div style={{ fontWeight: 'bold', overflow: 'hidden', whiteSpace: 'nowrap' }}>{def.name}</div>
-            <div style={{ fontSize: '8px', color: '#aaa' }}>{def.type}</div>
+            <div style={{ fontSize: '8px', color: '#aaa' }}>{typeDisplay[def.type]}</div>
             {showCost && <div style={{ position: 'absolute', top: 2, right: 2, background: 'blue', padding: '1px 3px', borderRadius: '3px' }}>{def.cost}</div>}
             <div style={{ marginTop: '4px', lineHeight: '1.1' }}>{def.description}</div>
             {count !== undefined && <div style={{ position: 'absolute', bottom: 2, right: 2, background: '#444', padding: '1px 3px' }}>x{count}</div>}
+        </div>
+    );
+};
+
+const GlossaryModal = ({ onClose }) => {
+    return (
+        <div style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0,0,0,1)',
+            zIndex: 100,
+            maxWidth: '600px',
+            margin: 'auto',
+            padding: '30px',
+            borderRadius: '6px',
+            display: 'flex',
+            flexDirection: 'column',
+            overflowY: 'auto',
+        }}>
+            <h2 style={{ textAlign: 'center', margin: '0' }}>Card Anatomy</h2>
+            <div style={{ textAlign: 'center' }}>
+                <img src="card-anatomy.png" alt="Card Anatomy" />
+            </div>
+            <h2 style={{ marginBottom: '0', textAlign: 'center' }}>Glossary</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Tech</strong></div>
+                    <div>Play X technique card(s).</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Spirit</strong></div>
+                    <div>Gain X spirit point(s) which can be used to channel cards.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Misstep</strong></div>
+                    <div>Add X misstep(s) to the opponent's discard.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Refine</strong></div>
+                    <div>Trash X card(s) from your hand. These cards are removed from the game.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Draw</strong></div>
+                    <div>Draw X card(s) from your deck.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Channel</strong></div>
+                    <div>Add X channel(s) during your channeling phase. Each channel allows you to buy one card with spirit.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Damage</strong></div>
+                    <div>Deal X damage to the opponent. Resolves at the end of the round.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Defense</strong></div>
+                    <div>Gain X defense points. Resolves against opponent's damage at the end of the round.</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px auto' }}>
+                    <div><strong>+X Stamina</strong></div>
+                    <div>Gain X stamina points.</div>
+                </div>
+            </div>
+
+            <h2 style={{ margin: '25px 0 10px', textAlign: 'center' }}>Card resolution order</h2>
+            <ol style={{ margin: '0 0 25px' }}>
+                <li>Add spirit, channels, damage, defense, stamina</li>
+                <li>Draw cards</li>
+                <li>Refine hand</li>
+                <li>Add missteps</li>
+                <li>Play techniques</li>
+            </ol>
+            <button onClick={onClose}>Close</button>
         </div>
     );
 };
@@ -45,6 +122,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
     const enemy = enemyData || { stamina: 20, loadout: [], name: "Training Dummy" };
 
     const { state: cs, actions } = useCombat(state.player, state.player.loadout, enemy, onFinish);
+    const [showGlossary, setShowGlossary] = useState(false);
 
     const isTechniquePhase = cs.phase === PHASES.TECHNIQUE;
     const isChannelPhase = cs.phase === PHASES.CHANNEL;
@@ -55,7 +133,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
     const canPlayAllResources = cs.hand.some(id => TECHNIQUES.find(c => c.id === id).type === CARD_TYPES.RESOURCE);
     return (
         <div className="screen container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-
+            <button onClick={() => setShowGlossary(true)}>Quick Reference</button>
+            {showGlossary && <GlossaryModal onClose={() => setShowGlossary(false)} />}
             {/* MODAL OVERLAY */}
             {isRefining && (
                 <div style={{
@@ -171,8 +250,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <div>
                         <h3 style={{ margin: 0 }}>{state.player.name} Level {state.player.level} {state.player.species}</h3>
-                        <strong>Stamina: {cs.playerStamina}</strong> |
-                        Acts: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
+                        <strong>Stamina: <span style={{ transition: 'color 2s ease', color: cs.tookDamage ? 'red' : 'white' }}>{cs.playerStamina}</span></strong> |
+                        Tech: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
                         {isTechniquePhase && (
