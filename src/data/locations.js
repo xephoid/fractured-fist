@@ -17,7 +17,7 @@ export const LOCATIONS = [
         type: 'HOME_BASE',
         owner: FACTION_IDS.UNCOUNTED,
         description: "Uncounted home base (Underground city).",
-        x: 80, y: 80,
+        x: 65, y: 80,
         icon: '🚇'
     },
     {
@@ -35,7 +35,7 @@ export const LOCATIONS = [
         type: 'HOME_BASE',
         owner: FACTION_IDS.THE_AWAKENED,
         description: "The Awakened home base (Dimensional energy zone).",
-        x: 20, y: 80,
+        x: 30, y: 70,
         icon: '🏚'
     },
     // Contested Locations
@@ -63,7 +63,7 @@ export const LOCATIONS = [
         type: 'CONTESTED',
         possibleFactions: [FACTION_IDS.UNCOUNTED, FACTION_IDS.THE_AWAKENED],
         description: "Desert Fracture Zone where sand turned to glass.",
-        x: 30, y: 70,
+        x: 75, y: 60,
         icon: '🏜'
     },
     {
@@ -73,7 +73,7 @@ export const LOCATIONS = [
         possibleFactions: [FACTION_IDS.TITAN_ENTERTAINMENT, FACTION_IDS.UNCOUNTED],
         description: "Coastal trading city, neutral ground.",
         x: 50, y: 30, // Adjusted layout
-        icon: '⛴'
+        icon: '🚢'
     },
     {
         id: 'verdant_sanctum',
@@ -81,7 +81,7 @@ export const LOCATIONS = [
         type: 'CONTESTED',
         possibleFactions: [FACTION_IDS.MASTERS_CIRCLE, FACTION_IDS.THE_AWAKENED],
         description: "Ancient forest with Phase Two Bouaux homes.",
-        x: 30, y: 50,
-        icon: '🛖'
+        x: 30, y: 55,
+        icon: '⛺'
     },
 ];
