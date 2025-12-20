@@ -51,7 +51,7 @@ export default function StartScreen({ onStart }) {
                             <li><strong>Combat:</strong> Pick opponents and challenge them in combat. <br /><a style={{ color: 'gold', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => { setShowRules(true); setShowCampaign(false); }}>See Combat Rules</a></li>
                             <li><strong>Learn Techniques:</strong> Gain new techniques by defeating opponents. Combine the best techniques to win!</li>
                             <li><strong>Gain XP:</strong> Gain experience points by defeating opponents. Makes you stronger!</li>
-                            <li><strong>Defeat the Champions of each Faction to become the World Champion!</strong></li>
+                            <li><strong>Defeat one Champion of each Faction to become the World Champion!</strong></li>
                         </ul>
                         <button onClick={() => setShowCampaign(false)} style={{ marginTop: '20px', width: '100%', padding: '10px' }}>Got it</button>
                     </div>
@@ -59,8 +59,12 @@ export default function StartScreen({ onStart }) {
             )}
 
             <h1>Fractured Fist</h1>
-            <div>
-                <a href="./intro.html" style={{ color: 'gold' }}>Read about the world</a>
+            <img src="punch-blast.svg" alt="Logo" style={{ width: '200px' }} />
+            <br />
+            <div style={{ textAlign: 'center' }}>
+                <a href="./intro.html" style={{ color: 'gold' }}>Introduction</a>
+                <br />
+                <small>NOTE: If you are on your phone I <br />recommend you rotate to landscape</small>
             </div>
             <div style={{ margin: '20px 0', display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}>
                 <label>
