@@ -256,8 +256,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
                         Tech: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
-                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => setShowRules(true)}>Rules</button>
-                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => setShowGlossary(true)}>Quick Reference</button>
+                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => { window.scrollTo(0, 0); setShowRules(true) }}>Rules</button>
+                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => { window.scrollTo(0, 0); setShowGlossary(true) }}>Quick Reference</button>
                         {isTechniquePhase && (
                             <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#000', color: 'white' }}>
                                 Pass To Channel Phase &rarr;
