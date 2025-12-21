@@ -26,14 +26,14 @@ export const TECHNIQUES = [
 
     // --- MASTERS' CIRCLE ---
     { id: 'defensive_kata', name: 'Defensive Kata', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+1 Refine, +2 Defense.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { defense: 2, refine: 2 } },
-    { id: 'perfect_form', name: 'Perfect Form', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+1 Refine, +2 Draw, +1 Tech.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { refine: 1, draw: 2, tech: 1 } },
+    { id: 'perfect_form', name: 'Perfect Form', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+1 Refine, +2 Draw, +1 Tech.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { refine: 1, draw: 2, actions: 1 } },
     { id: 'masters_riposte', name: "Master's Riposte", type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+1 Defense, +1 Damage.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { defense: 1, damage: 1 } },
-    { id: 'flowing_counter', name: 'Flowing Counter', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+2 Tech, +3 Defense.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { defense: 3, tech: 2 } },
+    { id: 'flowing_counter', name: 'Flowing Counter', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+2 Tech, +3 Defense.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { defense: 3, actions: 2 } },
 
     // --- UNCOUNTED ---
     { id: 'impose_pressure', name: 'Impose Pressure', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+1 Draw, +2 Spirit, +1 Channel.", faction: FACTION_IDS.UNCOUNTED, effects: { draw: 1, spirit: 2, channels: 1 } },
     { id: 'leg_sweep', name: 'Leg Sweep', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+2 Missteps, +1 Damage.", faction: FACTION_IDS.UNCOUNTED, effects: { damage: 1, add_misstep: 2 } },
-    { id: 'overwhelming_assault', name: 'Overwhelming Assault', type: CARD_TYPES.TECHNIQUE, cost: 8, description: "+2 Tech, +2 Damage.", faction: FACTION_IDS.UNCOUNTED, effects: { damage: 2, tech: 2 } },
+    { id: 'overwhelming_assault', name: 'Overwhelming Assault', type: CARD_TYPES.TECHNIQUE, cost: 8, description: "+2 Tech, +2 Damage.", faction: FACTION_IDS.UNCOUNTED, effects: { damage: 2, actions: 2 } },
     { id: 'ruthless_barrage', name: 'Ruthless Barrage', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+1 Draw, +2 Tech, +3 Missteps.", faction: FACTION_IDS.UNCOUNTED, effects: { actions: 2, add_misstep: 3, draw: 1 } },
 
     // --- TITAN ENTERTAINMENT ---
