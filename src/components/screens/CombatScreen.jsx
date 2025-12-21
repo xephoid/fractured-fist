@@ -4,6 +4,7 @@ import { useCombat, PHASES } from '../../hooks/useCombat';
 import { TECHNIQUES, CARD_TYPES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 import LogLine from '../common/LogLine';
+import GameRulesModal from '../common/GameRulesModal';
 
 const typeDisplay = {
     [CARD_TYPES.RESOURCE]: 'SPIRIT',
@@ -123,6 +124,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
 
     const { state: cs, actions } = useCombat(state.player, state.player.loadout, enemy, onFinish);
     const [showGlossary, setShowGlossary] = useState(false);
+    const [showRules, setShowRules] = useState(false);
 
     const isTechniquePhase = cs.phase === PHASES.TECHNIQUE;
     const isChannelPhase = cs.phase === PHASES.CHANNEL;
@@ -133,8 +135,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
     const canPlayAllResources = cs.hand.some(id => TECHNIQUES.find(c => c.id === id).type === CARD_TYPES.RESOURCE);
     return (
         <div className="screen container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-            <button onClick={() => setShowGlossary(true)}>Quick Reference</button>
             {showGlossary && <GlossaryModal onClose={() => setShowGlossary(false)} />}
+            {showRules && <GameRulesModal setShowRules={setShowRules} />}
             {/* MODAL OVERLAY */}
             {isRefining && (
                 <div style={{
@@ -254,6 +256,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
                         Tech: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
+                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => setShowRules(true)}>Rules</button>
+                        <button style={{ marginRight: '10px', background: '#444', color: 'white' }} onClick={() => setShowGlossary(true)}>Quick Reference</button>
                         {isTechniquePhase && (
                             <button onClick={actions.advancePhase} style={{ background: cs.actions === 0 ? 'gold' : '#000', color: 'white' }}>
                                 Pass To Channel Phase &rarr;
