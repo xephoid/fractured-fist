@@ -18,8 +18,8 @@ const CardItem = ({ cardId, isSelected, onClick }) => {
                 background: '#222',
                 cursor: 'pointer',
                 opacity: isSelected ? 1 : 0.6,
-                width: '120px',
-                height: '160px',
+                width: '140px',
+                height: '170px',
                 display: 'flex', flexDirection: 'column'
             }}
         >

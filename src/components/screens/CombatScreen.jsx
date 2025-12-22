@@ -36,7 +36,7 @@ const Card = ({ cardId, onClick, disabled, count, showCost, highlight }) => {
                 flexShrink: 0
             }}
         >
-            <div style={{ fontWeight: 'bold', overflow: 'hidden', whiteSpace: 'nowrap' }}>{def.name}</div>
+            <div style={{ fontWeight: 'bold', overflow: 'hidden' }}>{def.name}</div>
             <div style={{ fontSize: '8px', color: '#aaa' }}>{typeDisplay[def.type]}</div>
             {showCost && <div style={{ position: 'absolute', top: 2, right: 2, background: 'blue', padding: '1px 3px', borderRadius: '3px' }}>{def.cost}</div>}
             <div style={{ marginTop: '4px', lineHeight: '1.1' }}>{def.description}</div>

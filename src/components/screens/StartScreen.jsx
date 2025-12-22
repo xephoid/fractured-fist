@@ -55,9 +55,9 @@ export default function StartScreen({ onStart }) {
                 <label>
                     Species:
                     <select value={species} onChange={e => setSpecies(e.target.value)} style={{ width: '100%', padding: '5px', marginTop: '5px' }}>
-                        <option value="Human">Human (7 Stamina) | Normal</option>
-                        <option value="Bouaux">Bouaux (10 Stamina) | Easy</option>
-                        <option value="Unmoored">Unmoored (6 Stamina, Foe +4 Misstep) | Spicy</option>
+                        <option value="Human">Human (7 Stamina) | Challenging</option>
+                        <option value="Unmoored">Unmoored (6 Stamina, Foe +4 Misstep) | Easy</option>
+                        <option value="Bouaux">Bouaux (10 Stamina) | Mild</option>
                         <option value="Grankiki">Grankiki (4 Stamina, Draw +1) | Hard</option>
                     </select>
                 </label>

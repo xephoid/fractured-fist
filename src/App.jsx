@@ -56,21 +56,24 @@ function App() {
             dispatch({ type: 'ADD_CREDITS', payload: credits });
             dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
 
-            // Faction Politics
-            if (activeEnemy && activeEnemy.factionId && activeEnemy.tier >= 2) {
-                const locDef = LOCATIONS.find(l => l.id === activeLocation);
-                if (locDef && locDef.type === 'CONTESTED' && locDef.possibleFactions) {
-                    const enemyFaction = activeEnemy.factionId;
-                    const rivalFaction = locDef.possibleFactions.find(f => f !== enemyFaction);
-
-                    if (rivalFaction) {
-                        // Anger Enemy (-1)
-                        dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: enemyFaction, amount: -1 } });
-                        // Please Rival (+1)
-                        dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: rivalFaction, amount: 1 } });
-                    }
-                }
+            if (tier > 2) {
+                dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: activeEnemy.factionId, amount: 0.5 } });
             }
+            // Faction Politics
+            // if (activeEnemy && activeEnemy.factionId && activeEnemy.tier >= 2) {
+            //     const locDef = LOCATIONS.find(l => l.id === activeLocation);
+            //     if (locDef && locDef.type === 'CONTESTED' && locDef.possibleFactions) {
+            //         const enemyFaction = activeEnemy.factionId;
+            //         const rivalFaction = locDef.possibleFactions.find(f => f !== enemyFaction);
+
+            //         if (rivalFaction) {
+            //             // Anger Enemy (-1)
+            //             dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: enemyFaction, amount: -1 } });
+            //             // Please Rival (+1)
+            //             dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: rivalFaction, amount: 1 } });
+            //         }
+            //     }
+            // }
 
             // Find techniques to learn - FILTERED
             let choices = [];

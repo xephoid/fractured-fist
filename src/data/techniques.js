@@ -20,7 +20,7 @@ export const TECHNIQUES = [
     { id: 'block', name: 'Block', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Defense.", faction: null, effects: { defense: 1 } },
     { id: 'react', name: 'React', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech.", faction: null, effects: { actions: 2 } },
     { id: 'quicken', name: 'Quicken', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Draws.", faction: null, effects: { draw: 2 } },
-    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Spirit,\n+1 Channel.", faction: null, effects: { spirit: 2, channels: 1 } },
+    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+3 Spirit.", faction: null, effects: { spirit: 3 } },
     { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Missteps.", faction: null, effects: { add_misstep: 2 } },
     { id: 'assess', name: 'Assess', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Refine.", faction: null, effects: { refine: 1 } },
 
@@ -43,8 +43,8 @@ export const TECHNIQUES = [
     { id: 'devastating_blow', name: 'Devastating Blow', type: CARD_TYPES.TECHNIQUE, cost: 8, description: "+1 Draw, +3 Damage.", faction: FACTION_IDS.TITAN_ENTERTAINMENT, effects: { draw: 1, damage: 3 } },
 
     // --- THE AWAKENED ---
-    { id: 'energy_channeling', name: 'Energy Channeling', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+3 Spirit.", faction: FACTION_IDS.THE_AWAKENED, effects: { spirit: 3 } },
-    { id: 'enlightened_flow', name: 'Enlightened Flow', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+3 Tech, +1 Spirit.", faction: FACTION_IDS.THE_AWAKENED, effects: { actions: 3, spirit: 1 } },
+    { id: 'energy_channeling', name: 'Energy Channeling', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Spirit, +1 Channel.", faction: FACTION_IDS.THE_AWAKENED, effects: { spirit: 2, channels: 1 } },
+    { id: 'enlightened_flow', name: 'Enlightened Flow', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+3 Tech, +2 Spirit.", faction: FACTION_IDS.THE_AWAKENED, effects: { actions: 3, spirit: 2 } },
     { id: 'inner_harmony', name: 'Inner Harmony', type: CARD_TYPES.TECHNIQUE, cost: 6, description: "+2 Heal, +1 Refine.", faction: FACTION_IDS.THE_AWAKENED, effects: { heal: 2, refine: 1 } },
     { id: 'transcendent_strike', name: 'Transcendent Strike', type: CARD_TYPES.TECHNIQUE, cost: 8, description: "+1 Draw, +3 Heal, +2 Damage.", faction: FACTION_IDS.THE_AWAKENED, effects: { damage: 2, heal: 3, draw: 1 } },
 

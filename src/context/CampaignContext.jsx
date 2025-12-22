@@ -46,6 +46,7 @@ const initialState = {
         collection: [],
         loadout: [],
         deck: [],
+        won: false,
     },
     world: {
         currentLocationId: null,
@@ -123,8 +124,11 @@ function campaignReducer(state, action) {
         case 'UPDATE_STANDING':
             const { factionKey, amount } = action.payload;
             const newStanding = (state.world.factions[factionKey].standing || 0) + amount;
+            state.world.factions[factionKey].standing = newStanding;
+            const playerWon = Object.values(state.world.factions).reduce((acc, faction) => acc + (faction.standing > 0 ? 1 : 0), 0) >= 4;
             return {
                 ...state,
+                player: { ...state.player, won: playerWon },
                 world: {
                     ...state.world,
                     factions: {
