@@ -20,7 +20,7 @@ export const TECHNIQUES = [
     { id: 'block', name: 'Block', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Defense.", faction: null, effects: { defense: 1 } },
     { id: 'react', name: 'React', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech.", faction: null, effects: { actions: 2 } },
     { id: 'quicken', name: 'Quicken', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Draws.", faction: null, effects: { draw: 2 } },
-    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+3 Spirit.", faction: null, effects: { spirit: 3 } },
+    { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Spirit.", faction: null, effects: { spirit: 2 } },
     { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Missteps.", faction: null, effects: { add_misstep: 2 } },
     { id: 'assess', name: 'Assess', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Refine.", faction: null, effects: { refine: 1 } },
 
