@@ -57,7 +57,7 @@ function App() {
             dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
 
             if (tier > 2) {
-                dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: activeEnemy.factionId, amount: 0.5 } });
+                dispatch({ type: 'UPDATE_STANDING', payload: { factionKey: activeEnemy.factionId, amount: 1 } });
             }
             // Faction Politics
             // if (activeEnemy && activeEnemy.factionId && activeEnemy.tier >= 2) {
