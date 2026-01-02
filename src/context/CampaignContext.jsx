@@ -107,10 +107,8 @@ function campaignReducer(state, action) {
         case 'DEFEAT_CHAMPION':
             const { locationId, championTier } = action.payload;
             const newChampions = [...state.world.locations[locationId].champions];
-            console.log("oldChampions", newChampions);
             const championIndex = newChampions.findIndex(champ => champ?.tier === championTier);
             newChampions[championIndex] = null;
-            console.log("newChampions", newChampions);
             return {
                 ...state,
                 world: {
@@ -168,7 +166,9 @@ function campaignReducer(state, action) {
                     ...state.player,
                     xp: newXp,
                     level: newLevel,
-                    stamina: newStamina
+                    stamina: newStamina,
+                    levelUp: newLevel > state.player.level,
+                    staminaIncrease: newStamina - state.player.stamina,
                 }
             };
 

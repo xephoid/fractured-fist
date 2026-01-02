@@ -52,6 +52,7 @@ function App() {
             const xp = tierValues[tier] || 1;
             const credits = creditMap[tier] || 50;
 
+            console.log('player xp (before)', state.player.xp);
             dispatch({ type: 'GAIN_XP', payload: xp });
             dispatch({ type: 'ADD_CREDITS', payload: credits });
             dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
@@ -85,10 +86,14 @@ function App() {
                 choices = fallback.filter(id => !state.player.collection.includes(id));
             }
 
+
+            console.log('player xp (after)', state.player.xp);
             setRewardOptions({
                 techniques: choices,
                 earnedXp: xp,
-                earnedCredits: credits
+                earnedCredits: credits,
+                leveledUp: state.player.levelUp,
+                hpIncrease: state.player.staminaIncrease,
             });
             setView('REWARD');
         } else {

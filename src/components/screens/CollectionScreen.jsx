@@ -27,7 +27,7 @@ const CardItem = ({ cardId, isSelected, onClick }) => {
                 <TooltippedName techniqueId={def.id} />
             </div>
             <div style={{ fontSize: '10px', color: '#aaa' }}>{def.type}</div>
-            <div style={{ flex: 1, fontSize: '11px', overflow: 'hidden' }}>{def.description}</div>
+            <div style={{ flex: 1, fontSize: '11px', overflow: 'hidden', whiteSpace: 'pre' }}>{def.description}</div>
             <div style={{ textAlign: 'right', fontWeight: 'bold', color: 'lightblue' }}>{def.cost} Spirit</div>
         </div>
     );
