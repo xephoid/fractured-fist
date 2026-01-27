@@ -21,8 +21,8 @@ export const TECHNIQUES = [
     { id: 'react', name: 'React', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech.", faction: null, effects: { actions: 2 } },
     { id: 'quicken', name: 'Quicken', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Draws.", faction: null, effects: { draw: 2 } },
     { id: 'center', name: 'Center', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Spirit.", faction: null, effects: { spirit: 2 } },
-    { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Missteps.", faction: null, effects: { add_misstep: 2 } },
-    { id: 'assess', name: 'Assess', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Refine.", faction: null, effects: { refine: 1 } },
+    { id: 'distract', name: 'Distract', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Missteps.", faction: null, effects: { add_misstep: 2 } },
+    { id: 'assess', name: 'Assess', type: CARD_TYPES.TECHNIQUE, cost: 2, description: "+2 Refine.", faction: null, effects: { refine: 2 } },
 
     // --- MASTERS' CIRCLE ---
     { id: 'defensive_kata', name: 'Defensive Kata', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Refine,\r\n+2 Defense.", faction: FACTION_IDS.MASTERS_CIRCLE, effects: { defense: 2, refine: 2 } },
@@ -45,15 +45,15 @@ export const TECHNIQUES = [
     // --- THE AWAKENED ---
     { id: 'energy_channeling', name: 'Energy Channeling', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Spirit,\r\n+1 Channel.", faction: FACTION_IDS.THE_AWAKENED, effects: { spirit: 2, channels: 1 } },
     { id: 'enlightened_flow', name: 'Enlightened Flow', type: CARD_TYPES.TECHNIQUE, cost: 5, description: "+3 Tech,\r\n+2 Spirit.", faction: FACTION_IDS.THE_AWAKENED, effects: { actions: 3, spirit: 2 } },
-    { id: 'inner_harmony', name: 'Inner Harmony', type: CARD_TYPES.TECHNIQUE, cost: 6, description: "+2 Heal,\r\n+1 Refine.", faction: FACTION_IDS.THE_AWAKENED, effects: { heal: 2, refine: 1 } },
+    { id: 'inner_harmony', name: 'Inner Harmony', type: CARD_TYPES.TECHNIQUE, cost: 6, description: "+2 Heal,\r\n+2 Refine.", faction: FACTION_IDS.THE_AWAKENED, effects: { heal: 2, refine: 2 } },
     { id: 'transcendent_strike', name: 'Transcendent Strike', type: CARD_TYPES.TECHNIQUE, cost: 8, description: "+1 Draw,\r\n+3 Heal,\r\n+2 Damage.", faction: FACTION_IDS.THE_AWAKENED, effects: { damage: 2, heal: 3, draw: 1 } },
 
     // --- GENERAL ---
     { id: 'reading_the_opponent', name: 'Read Opponent', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+1 Draw,\r\n+2 Tech.", faction: null, effects: { draw: 1, actions: 2 } },
     { id: 'deflecting_block', name: 'Deflecting Block', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+1 Tech,\r\n+1 Defense.", faction: null, effects: { actions: 1, defense: 1 } },
-    { id: 'smoke_bomb', name: 'Smoke Bomb', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech,\r\n+2 Missteps.", faction: null, effects: { actions: 2, add_misstep: 2 } },
+    { id: 'smoke_bomb', name: 'Smoke Bomb', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech,\r\n+1 Misstep.", faction: null, effects: { actions: 2, add_misstep: 1 } },
     { id: 'combination_rush', name: 'Combination Rush', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+2 Tech,\r\n+1 Channel.", faction: null, effects: { actions: 2, channels: 1 } },
-    { id: 'thoughtful_composure', name: 'Thoughtful Composure', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Tech,\r\n+1 Refine.", faction: null, effects: { actions: 2, refine: 1 } },
+    { id: 'thoughtful_composure', name: 'Thoughtful Composure', type: CARD_TYPES.TECHNIQUE, cost: 4, description: "+2 Tech,\r\n+2 Refine.", faction: null, effects: { actions: 2, refine: 2 } },
     { id: 'mental_clarity', name: 'Mental Clarity', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+3 Draw.", faction: null, effects: { draw: 3 } },
     { id: 'flying_kick', name: 'Flying Kick', type: CARD_TYPES.TECHNIQUE, cost: 6, description: "+2 Damage.", faction: null, effects: { damage: 2 } },
 ];
