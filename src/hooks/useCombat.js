@@ -64,6 +64,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     const [enemyDamage, setEnemyDamage] = useState(0); // Actual queued damage from cards
     const [enemyIntent, setEnemyIntent] = useState({ description: 'Waiting...' });
     const [tookDamage, setTookDamage] = useState(false);
+    const [healed, setHealed] = useState(false);
 
     // --- Init ---
     useEffect(() => {
@@ -103,6 +104,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
 
         console.log('eLoadout', eLoadout);
         setTookDamage(false);
+        setHealed(false);
 
         setEnemySupply(initSupply(eLoadout));
 
@@ -190,6 +192,12 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         if (effects.damage) setDamageDealt(p => p + effects.damage);
         if (effects.channels) setChannels(p => p + effects.channels); // Channel Limit Rule
         if (effects.heal) setPlayerStamina(p => Math.min(p + effects.heal, playerStats.stamina));
+
+        if (effects.heal > 0 && Math.min(playerStamina + effects.heal, playerStats.stamina) > playerStamina) {
+            setHealed(true)
+        } else {
+            setHealed(false);
+        }
 
         if (def.value) setSpirit(p => p + def.value);
 
@@ -579,7 +587,8 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             playerStamina,
             enemyStamina, enemyDeck, enemyHand, enemyDefense, enemyDamage,
             enemyLastPlayed, enemyLastBought,
-            tookDamage
+            tookDamage,
+            healed
         },
         actions: { playCard, buyCard, advancePhase, endPlayerTurn, refineCard, skipRefine, playFocusReload, playAllResources }
     };

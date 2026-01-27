@@ -252,7 +252,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <div>
                         <h3 style={{ margin: 0 }}>{state.player.name} Level {state.player.level} {state.player.species}</h3>
-                        <strong>Stamina: <span style={{ transition: 'color 2s ease', color: cs.tookDamage ? 'red' : 'white' }}>{cs.playerStamina}</span></strong> |
+                        <strong>Stamina: <span style={{ transition: 'color 2s ease', color: cs.tookDamage ? 'red' : cs.healed ? 'green' : 'white' }}>{cs.playerStamina}</span></strong> |
                         Tech: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
