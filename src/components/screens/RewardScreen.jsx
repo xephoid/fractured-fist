@@ -22,12 +22,16 @@ export default function RewardScreen({ rewardOptions, onSelect, onSkip }) {
                     <div style={{ color: '#aaa', fontSize: '12px' }}>XP</div>
                 </div>
                 {rewardOptions.leveledUp && (
-                    <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+1</div>
-                        <div style={{ color: '#aaa', fontSize: '12px' }}>Level</div>
-                        <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+{rewardOptions.hpIncrease}</div>
-                        <div style={{ color: '#aaa', fontSize: '12px' }}>Stamina</div>
-                    </div>
+                    <>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+1</div>
+                            <div style={{ color: '#aaa', fontSize: '12px' }}>LEVEL</div>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+{rewardOptions.hpIncrease}</div>
+                            <div style={{ color: '#aaa', fontSize: '12px' }}>STAMINA</div>
+                        </div>
+                    </>
                 )}
             </div>
 
