@@ -57,3 +57,15 @@ export const TECHNIQUES = [
     { id: 'mental_clarity', name: 'Mental Clarity', type: CARD_TYPES.TECHNIQUE, cost: 3, description: "+3 Draw.", faction: null, effects: { draw: 3 } },
     { id: 'flying_kick', name: 'Flying Kick', type: CARD_TYPES.TECHNIQUE, cost: 6, description: "+2 Damage.", faction: null, effects: { damage: 2 } },
 ];
+
+export const CHEAT_TECHNIQUES = [
+    { id: 'everything', name: 'Do All The Things!', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+1 Draw,\r\n+1 Tech,\r\n+1 Refine,\r\n+1 Channel,\r\n+1 Defense,\r\n+1 Damage,\r\n+1 Heal,\r\n+1 Spirit,\r\n+1 Misstep", faction: null, effects: { draw: 1, actions: 1, refine: 1, channels: 1, defense: 1, damage: 1, heal: 1, spirit: 1, add_misstep: 1 } },
+    { id: 'cart_blanche', name: 'Cart Blanche', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Spirit,\r\n+100 Channels", faction: null, effects: { spirit: 100, channels: 100 } },
+    { id: 'one_hundred_damage', name: 'Hundred Damage', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Damage", faction: null, effects: { damage: 100 } },
+    { id: 'x_potion', name: 'X Potion', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Healing", faction: null, effects: { heal: 100 } },
+    { id: 'force_field', name: 'Force Field', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Defense", faction: null, effects: { defense: 100 } },
+    { id: 'infinite_actions', name: 'Infinite Actions', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Actions", faction: null, effects: { actions: 100 } },
+    { id: 'refine_all', name: 'Refine All', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+100 Refine", faction: null, effects: { refine: 100 } },
+    { id: 'maximum_misstep', name: 'Maximum Missteps', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+20 Missteps", faction: null, effects: { add_misstep: 20 } },
+    { id: 'draw_party', name: 'Draw Party', type: CARD_TYPES.TECHNIQUE, cost: 0, description: "+5 Draw", faction: null, effects: { draw: 5 } },
+];

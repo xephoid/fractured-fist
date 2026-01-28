@@ -8,7 +8,7 @@ import LocationDetail from './components/screens/LocationDetail';
 import CollectionScreen from './components/screens/CollectionScreen';
 import RewardScreen from './components/screens/RewardScreen';
 import DefeatScreen from './components/screens/DefeatScreen';
-import { tierValues } from './data';
+import { tierValues, levelUp, creditMap } from './data';
 
 function App() {
     const { state, dispatch } = useCampaign();
@@ -47,12 +47,12 @@ function App() {
         if (won) {
             // Calculate Rewards
             const tier = activeEnemy?.tier || 1;
-            const creditMap = { 1: 50, 2: 100, 3: 150 };
 
             const xp = tierValues[tier] || 1;
             const credits = creditMap[tier] || 50;
 
-            console.log('player xp (before)', state.player.xp);
+            const { newLevel, newStamina } = levelUp(state.player, xp);
+
             dispatch({ type: 'GAIN_XP', payload: xp });
             dispatch({ type: 'ADD_CREDITS', payload: credits });
             dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
@@ -86,14 +86,13 @@ function App() {
                 choices = fallback.filter(id => !state.player.collection.includes(id));
             }
 
-
-            console.log('player xp (after)', state.player.xp);
             setRewardOptions({
                 techniques: choices,
                 earnedXp: xp,
                 earnedCredits: credits,
-                leveledUp: state.player.levelUp,
-                hpIncrease: state.player.staminaIncrease,
+                leveledUp: state.player.level !== newLevel,
+                newLevel,
+                hpIncrease: newStamina - state.player.stamina,
             });
             setView('REWARD');
         } else {

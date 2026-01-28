@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { TECHNIQUES, CARD_TYPES } from '../data/techniques';
+import { STARTING_HAND, MAX_MISSTEPS } from '../data';
 
 // Helper: Shuffle
 const shuffle = (array) => {
@@ -62,26 +63,26 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     const [enemyDiscard, setEnemyDiscard] = useState([]);
     const [enemyDefense, setEnemyDefense] = useState(0);
     const [enemyDamage, setEnemyDamage] = useState(0); // Actual queued damage from cards
-    const [enemyIntent, setEnemyIntent] = useState({ description: 'Waiting...' });
     const [tookDamage, setTookDamage] = useState(false);
+    const [playerTotalMissteps, setPlayerTotalMissteps] = useState(3);
+    const [enemyTotalMissteps, setEnemyTotalMissteps] = useState(3);
     const [healed, setHealed] = useState(false);
 
     // --- Init ---
     useEffect(() => {
         // Deck Setup (Shared Starter)
-        const starterList = ['focus', 'focus', 'focus', 'focus', 'focus', 'focus', 'focus', 'misstep', 'misstep', 'misstep'];
-
         // Player Init
-        const pShuffled = shuffle([...starterList]);
+        const pShuffled = shuffle([...STARTING_HAND]);
         setDeck(pShuffled.slice(handSize));
         setHand(pShuffled.slice(0, handSize));
 
         // Enemy Init
-        let enemyStarter = ['focus', 'focus', 'focus', 'focus', 'focus', 'focus', 'focus', 'misstep', 'misstep', 'misstep'];
+        let enemyStarter = [...STARTING_HAND];
         // Note: Rules say Species modifiers apply to Player only? Or Enemy too?
         // Unmoored rule says "Opponent starts with 2 addl Missteps".
         if (species === 'Unmoored') {
             enemyStarter.push('misstep', 'misstep', 'misstep', 'misstep');
+            setEnemyTotalMissteps(6);
         }
         const eShuffled = shuffle(enemyStarter);
         setEnemyDeck(eShuffled.slice(5)); // Enemy always draws 5? Yes standard rules apply to enemy.
@@ -222,8 +223,11 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
 
         if (effects.add_misstep) {
             // Pollute Enemy
-            setEnemyDiscard(ed => [...ed, ...Array(effects.add_misstep).fill('misstep')]);
-            addLog(`Sent ${effects.add_misstep} Missteps to opponent!`);
+            const toAdd = Math.min(effects.add_misstep, MAX_MISSTEPS - enemyTotalMissteps);
+            const maxReached = toAdd < effects.add_misstep;
+            setEnemyTotalMissteps(toAdd + enemyTotalMissteps);
+            setEnemyDiscard(ed => [...ed, ...Array(toAdd).fill('misstep')]);
+            addLog(`Sent ${toAdd} Missteps to opponent!${maxReached ? ' (Max reached)' : ''}`);
         }
 
         setPlayed(p => [...p, cardId]);
@@ -234,6 +238,10 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         if (refinePending <= 0) return;
 
         const cardToTrash = hand[index];
+        if (cardToTrash === 'misstep') {
+            setPlayerTotalMissteps(p => p - 1);
+        }
+
         const newHand = [...hand];
         newHand.splice(index, 1);
         setHand(newHand);
@@ -393,12 +401,15 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
                 addLog(`Enemy gained ${def.effects.spirit} Spirit.`);
             }
             if (def.effects?.add_misstep) {
-                setDiscard(d => [...d, ...Array(def.effects.add_misstep).fill('misstep')]);
-                addLog(`Enemy sent ${def.effects.add_misstep} Missteps!`);
+                const toAdd = Math.min(def.effects.add_misstep, MAX_MISSTEPS - playerTotalMissteps);
+                const maxReached = toAdd < def.effects.add_misstep;
+                setPlayerTotalMissteps(toAdd + playerTotalMissteps);
+                setDiscard(d => [...d, ...Array(toAdd).fill('misstep')]);
+                addLog(`Enemy sent ${toAdd} Missteps!${maxReached ? ' (Max reached)' : ''}`);
             }
             if (def.effects?.heal) {
                 setEnemyStamina(s => Math.min(s + def.effects.heal, enemyData.maxStamina));
-                addLog(`Enemy healed ${def.effects.heal} HP.`);
+                addLog(`Enemy healed ${def.effects.heal} Stamina.`);
             }
             if (def.effects?.refine) {
                 let toRefine = def.effects.refine;
@@ -406,6 +417,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
                     const badIdx = eHand.findIndex(id => id === 'misstep');
                     if (badIdx >= 0) {
                         eHand.splice(badIdx, 1);
+                        setEnemyTotalMissteps(e => e - 1);
                         addLog(`Enemy refined Misstep.`);
                     } else {
                         const focusIdx = eHand.findIndex(id => id === 'focus');
@@ -539,7 +551,8 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         setTookDamage(netEnemyDmg > 0);
 
         const newEH = enemyStamina - netPlayerDmg;
-        const newPH = playerStamina - netEnemyDmg;
+        // CHEAT CODE
+        const newPH = (playerStats.name.toLowerCase() === 'brash taunter') ? 1 : playerStamina - netEnemyDmg;
 
         setEnemyStamina(newEH);
         setPlayerStamina(newPH);
@@ -547,6 +560,12 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
 
         if (newEH <= 0 || newPH <= 0) {
             onCombatEnd(newPH > newEH, log);
+            return;
+        }
+
+        // CHEAT CODE
+        if (playerStats.name.toLowerCase() === 'minneapolis') {
+            onCombatEnd(true, log);
             return;
         }
 

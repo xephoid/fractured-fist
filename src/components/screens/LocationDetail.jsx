@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import TooltippedName from '../common/TooltippedName';
-import { tierValues, levelThresholds } from '../../data';
+import { tierValues, levelThresholds, displayPlayerName } from '../../data';
 
 export default function LocationDetail({ locationId, onBack, onFight, onOpenCollection }) {
     const { state } = useCampaign();
@@ -23,7 +23,7 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', float: 'right' }}>
                     <button onClick={onOpenCollection}>Manage Techniques</button>
                     <div>
-                        <div>{state.player.name}</div>
+                        <div>{displayPlayerName(state.player)}</div>
                         <div>Level {state.player.level} {state.player.species}</div>
                         <div>{state.player.xp}/{levelThresholds[state.player.level]} XP</div>
                     </div>

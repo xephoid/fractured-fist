@@ -2,8 +2,9 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { api } from '../services/api';
 import { LOCATIONS } from '../data/locations';
 import { FACTION_IDS } from '../data/factions';
-import { levelThresholds } from '../data';
+import { levelUp } from '../data';
 import { generateChampion } from '../services/championGenerator';
+import { TECHNIQUES, CARD_TYPES, CHEAT_TECHNIQUES } from '../data/techniques';
 
 const CampaignContext = createContext();
 
@@ -76,8 +77,21 @@ function campaignReducer(state, action) {
             if (action.payload === 'Unmoored') stamina = 6;
             if (action.payload === 'Bouaux') stamina = 10;
 
+
+            // CHEAT Code
+            let maxLoadout = 7;
+            if (state.player.name.toLowerCase() === 'power overwhelming') {
+                maxLoadout = CHEAT_TECHNIQUES.length;
+                CHEAT_TECHNIQUES.forEach(tech => {
+                    TECHNIQUES.unshift(tech);
+                });
+            }
             // Default Starter Collection & Loadout (if empty)
-            const starterCards = ['jab', 'block', 'react', 'quicken', 'center', 'distract', 'assess'];
+            const onlyTechniques = TECHNIQUES.filter(c => c.type === CARD_TYPES.TECHNIQUE).map(c => c.id);
+
+            // CHEAT CODE
+            const starterCards = (state.player.name.toLowerCase() === 'charade sc') ? onlyTechniques :
+                onlyTechniques.slice(0, maxLoadout);
 
             return {
                 ...state,
@@ -86,7 +100,7 @@ function campaignReducer(state, action) {
                     species: action.payload,
                     stamina,
                     collection: starterCards,
-                    loadout: starterCards
+                    loadout: starterCards.slice(0, maxLoadout) // Needs to slice in case of cheat above
                 },
             };
         case 'SET_PLAYER_NAME':
@@ -143,22 +157,7 @@ function campaignReducer(state, action) {
 
         case 'GAIN_XP':
             const xpGained = action.payload;
-            const newXp = state.player.xp + xpGained;
-            let newLevel = state.player.level;
-            let newStamina = state.player.stamina;
-
-            // Level Thresholds
-            // 1->2: 4, 2->3: 8, 3->4: 12, 4->5: 24
-            if (levelThresholds[newLevel] && newXp >= levelThresholds[newLevel]) {
-                newLevel++;
-                // Stamina Increases
-                const s = state.player.species;
-                if (s === 'Bouaux') newStamina += 2;
-                else if (s === 'Grankiki') {
-                    if (newLevel !== 3) newStamina += 1;
-                }
-                else newStamina += 1;
-            }
+            const { newLevel, newStamina, newXp } = levelUp(state.player, xpGained);
 
             return {
                 ...state,

@@ -3,9 +3,8 @@ import { TECHNIQUES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 
 export default function RewardScreen({ rewardOptions, onSelect, onSkip }) {
-    const { techniques, earnedXp, earnedCredits } = rewardOptions;
+    const { techniques, earnedXp, earnedCredits, leveledUp, newLevel, hpIncrease } = rewardOptions;
 
-    // Techniques to learn
     const options = techniques || [];
 
     return (
@@ -21,14 +20,14 @@ export default function RewardScreen({ rewardOptions, onSelect, onSkip }) {
                     <div style={{ fontSize: '24px', color: 'cyan', fontWeight: 'bold' }}>+{earnedXp}</div>
                     <div style={{ color: '#aaa', fontSize: '12px' }}>XP</div>
                 </div>
-                {rewardOptions.leveledUp && (
+                {leveledUp && (
                     <>
                         <div style={{ textAlign: 'center' }}>
-                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+1</div>
+                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>{newLevel}</div>
                             <div style={{ color: '#aaa', fontSize: '12px' }}>LEVEL</div>
                         </div>
                         <div style={{ textAlign: 'center' }}>
-                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+{rewardOptions.hpIncrease}</div>
+                            <div style={{ fontSize: '24px', color: 'green', fontWeight: 'bold' }}>+{hpIncrease}</div>
                             <div style={{ color: '#aaa', fontSize: '12px' }}>STAMINA</div>
                         </div>
                     </>

@@ -5,6 +5,7 @@ import { TECHNIQUES, CARD_TYPES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 import LogLine from '../common/LogLine';
 import GameRulesModal from '../common/GameRulesModal';
+import { displayPlayerName } from '../../data';
 
 const typeDisplay = {
     [CARD_TYPES.RESOURCE]: 'SPIRIT',
@@ -130,6 +131,11 @@ export default function CombatScreen({ onFinish, enemyData }) {
     const isChannelPhase = cs.phase === PHASES.CHANNEL;
     const isRefining = cs.refinePending > 0;
 
+    const forfeit = () => {
+        const log = [...cs.log, `${displayPlayerName(state.player)} forfeited the match.`];
+        onFinish(false, log);
+    };
+
     // Focus Catchup Condition
     const canReloadFocus = cs.hand.some(id => id === 'focus') && cs.playerStamina < cs.enemyStamina;
     const canPlayAllResources = cs.hand.some(id => TECHNIQUES.find(c => c.id === id).type === CARD_TYPES.RESOURCE);
@@ -164,7 +170,7 @@ export default function CombatScreen({ onFinish, enemyData }) {
             <div style={{ flex: 1, borderBottom: '1px solid #444', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h3 style={{ margin: 0 }}>{enemy.name}</h3>
-                    <div>Stamina: {cs.enemyStamina}</div>
+                    <div>Stamina: {cs.enemyStamina}<span style={{ fontSize: '10px' }}>/{enemy.maxStamina}</span></div>
                     <div style={{ fontSize: '12px', color: '#aaa' }}>
                         Deck: {cs.enemyDeck.length} | Hand: {cs.enemyHand.length}
                     </div>
@@ -251,8 +257,8 @@ export default function CombatScreen({ onFinish, enemyData }) {
             <div style={{ flex: 3, padding: '10px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <div>
-                        <h3 style={{ margin: 0 }}>{state.player.name} Level {state.player.level} {state.player.species}</h3>
-                        <strong>Stamina: <span style={{ transition: 'color 2s ease', color: cs.tookDamage ? 'red' : cs.healed ? 'green' : 'white' }}>{cs.playerStamina}</span></strong> |
+                        <h3 style={{ margin: 0 }}>{displayPlayerName(state.player)} Level {state.player.level} {state.player.species}</h3>
+                        <strong>Stamina: <span style={{ transition: 'color 2s ease', color: cs.tookDamage ? 'red' : cs.healed ? 'green' : 'white' }}>{cs.playerStamina}</span><span style={{ fontSize: '10px' }}>/{state.player.stamina}</span></strong> |
                         Tech: {cs.actions} | Spirit: {cs.spirit} | Def: {cs.defense} | Dmg: {cs.damageDealt}
                     </div>
                     <div>
@@ -318,7 +324,9 @@ export default function CombatScreen({ onFinish, enemyData }) {
                         )}
                     </div>
                 </div>
-                <div style={{ fontSize: '10px', color: '#555', marginTop: '2px' }}>Deck: {cs.deck.length} | Discard: {cs.discard.length}</div>
+                <div style={{ fontSize: '10px', color: '#555', marginTop: '2px' }}>Deck: {cs.deck.length} | Discard: {cs.discard.length}
+                    <button style={{ fontSize: '10px', float: 'right', background: 'grey', color: 'white' }} onClick={forfeit}>Forfeit</button>
+                </div>
             </div>
         </div>
     );

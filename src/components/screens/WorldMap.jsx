@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import { LOCATIONS } from '../../data/locations';
-import { levelThresholds } from '../../data';
+import { levelThresholds, displayPlayerName } from '../../data';
 import { FACTIONS } from '../../data/factions';
 
 export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGame }) {
@@ -15,7 +15,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <button onClick={onOpenCollection}>Manage Techniques</button>
                     <div>
-                        <div>{state.player.name}</div>
+                        <div>{displayPlayerName(state.player)}</div>
                         <div>Level {state.player.level} {state.player.species}</div>
                         <div>{state.player.xp}/{levelThresholds[state.player.level]} XP</div>
                     </div>
