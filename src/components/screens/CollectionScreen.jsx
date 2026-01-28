@@ -4,7 +4,7 @@ import { TECHNIQUES, CARD_TYPES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
 
 // Reusable for grid
-const CardItem = ({ cardId, isSelected, onClick }) => {
+const CardItem = ({ cardId, isSelected, onClick, locked }) => {
     const def = TECHNIQUES.find(c => c.id === cardId);
     if (!def) return null;
 
@@ -12,10 +12,10 @@ const CardItem = ({ cardId, isSelected, onClick }) => {
         <div
             onClick={onClick}
             style={{
-                border: isSelected ? '3px solid cyan' : '1px solid #555',
+                border: locked ? '1px solid #222' : isSelected ? '3px solid cyan' : '1px solid #555',
                 borderRadius: '8px',
                 padding: '10px',
-                background: '#222',
+                background: locked ? '#000' : '#222',
                 cursor: 'pointer',
                 opacity: isSelected ? 1 : 0.6,
                 width: '140px',
@@ -37,6 +37,9 @@ export default function CollectionScreen({ onBack }) {
     const { state, dispatch } = useCampaign();
     const collection = state.player.collection || [];
     const initialLoadout = state.player.loadout || [];
+
+
+    const lockedCards = TECHNIQUES.filter(c => c.type === CARD_TYPES.TECHNIQUE && !collection.includes(c.id));
 
     const [selected, setSelected] = useState([...initialLoadout]);
 
@@ -77,6 +80,20 @@ export default function CollectionScreen({ onBack }) {
                         cardId={id}
                         isSelected={selected.includes(id)}
                         onClick={() => handleToggle(id)}
+                        locked={false}
+                    />
+                ))}
+            </div>
+            <h2>Unlockable Techniques</h2>
+            <small>You can unlock these by defeating other fighters</small>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px' }}>
+                {lockedCards.map(card => (
+                    <CardItem
+                        key={card.id}
+                        cardId={card.id}
+                        isSelected={false}
+                        onClick={() => { }}
+                        locked={true}
                     />
                 ))}
             </div>
