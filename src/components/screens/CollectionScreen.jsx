@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import { TECHNIQUES, CARD_TYPES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
+import { track } from '../../services/analytics';
 
 // Reusable for grid
 const CardItem = ({ cardId, isSelected, onClick, locked }) => {
@@ -45,9 +46,11 @@ export default function CollectionScreen({ onBack }) {
 
     const handleToggle = (id) => {
         if (selected.includes(id)) {
+            track('technique_deselected', { technique_id: id });
             setSelected(prev => prev.filter(c => c !== id));
         } else {
             if (selected.length >= 7) return; // Limit 7
+            track('technique_selected', { technique_id: id });
             setSelected(prev => [...prev, id]);
         }
     };
@@ -57,6 +60,7 @@ export default function CollectionScreen({ onBack }) {
             alert("You must select exactly 7 techniques.");
             return;
         }
+        track('loadout_saved', { techniques: selected });
         dispatch({ type: 'SET_LOADOUT', payload: selected });
         onBack();
     };

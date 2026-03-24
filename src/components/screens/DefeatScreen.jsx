@@ -1,5 +1,6 @@
 import React from 'react';
 import LogLine from '../common/LogLine';
+import { track } from '../../services/analytics';
 
 export default function DefeatScreen({ onContinue, log }) {
     return (
@@ -36,7 +37,7 @@ export default function DefeatScreen({ onContinue, log }) {
             </div>
 
             <button
-                onClick={onContinue}
+                onClick={() => { track('retreat_and_recover'); onContinue(); }}
                 style={{
                     padding: '15px 30px',
                     fontSize: '20px',

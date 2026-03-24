@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import GameRulesModal from '../common/GameRulesModal';
+import { track } from '../../services/analytics';
 
 export default function StartScreen({ onStart }) {
     const { state, dispatch } = useCampaign();
@@ -10,6 +11,7 @@ export default function StartScreen({ onStart }) {
     const [showCampaign, setShowCampaign] = useState(false);
 
     const handleStart = () => {
+        track('game_started', { player_name: name, player_species: species });
         dispatch({ type: 'SET_PLAYER_NAME', payload: name });
         dispatch({ type: 'SET_PLAYER_SPECIES', payload: species });
         onStart();

@@ -6,6 +6,7 @@ import TooltippedName from '../common/TooltippedName';
 import LogLine from '../common/LogLine';
 import GameRulesModal from '../common/GameRulesModal';
 import { displayPlayerName } from '../../data';
+import { track } from '../../services/analytics';
 
 const typeDisplay = {
     [CARD_TYPES.RESOURCE]: 'SPIRIT',
@@ -132,6 +133,12 @@ export default function CombatScreen({ onFinish, enemyData }) {
     const isRefining = cs.refinePending > 0;
 
     const forfeit = () => {
+        track('combat_forfeited', {
+            enemy_name: enemy.name,
+            enemy_tier: enemy.tier,
+            player_stamina: cs.playerStamina,
+            enemy_stamina: cs.enemyStamina,
+        });
         const log = [...cs.log, `${displayPlayerName(state.player)} forfeited the match.`];
         onFinish(false, log);
     };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCampaign } from '../../context/CampaignContext';
 import TooltippedName from '../common/TooltippedName';
 import { tierValues, levelThresholds, displayPlayerName } from '../../data';
+import { track } from '../../services/analytics';
 
 export default function LocationDetail({ locationId, onBack, onFight, onOpenCollection }) {
     const { state } = useCampaign();
@@ -13,6 +14,12 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
     if (!loc) return <div>Location not found.</div>;
 
     const handleChallenge = (champ) => {
+        track('opponent_challenged', {
+            opponent_name: champ.name,
+            opponent_tier: champ.tier,
+            opponent_faction: champ.factionId,
+            location_id: locationId,
+        });
         onFight(champ);
     };
 
@@ -21,7 +28,7 @@ export default function LocationDetail({ locationId, onBack, onFight, onOpenColl
             <header style={{ borderBottom: '1px solid #444', paddingBottom: '10px', marginBottom: '20px' }}>
                 <button onClick={onBack}>&larr; Back to Map</button>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', float: 'right' }}>
-                    <button onClick={onOpenCollection}>Manage Techniques</button>
+                    <button onClick={() => { track('collection_opened', { from: 'location_detail' }); onOpenCollection(); }}>Manage Techniques</button>
                     <div>
                         <div>{displayPlayerName(state.player)}</div>
                         <div>Level {state.player.level} {state.player.species}</div>

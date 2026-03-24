@@ -1,6 +1,7 @@
 import React from 'react';
 import { TECHNIQUES } from '../../data/techniques';
 import TooltippedName from '../common/TooltippedName';
+import { track } from '../../services/analytics';
 
 export default function RewardScreen({ rewardOptions, onSelect, onSkip }) {
     const { techniques, earnedXp, earnedCredits, leveledUp, newLevel, hpIncrease } = rewardOptions;
@@ -57,7 +58,7 @@ export default function RewardScreen({ rewardOptions, onSelect, onSkip }) {
                 })}
             </div>
 
-            <button onClick={onSkip} style={{ background: 'transparent', border: '1px solid #555', color: '#aaa' }}>
+            <button onClick={() => { track('reward_skipped'); onSkip(); }} style={{ background: 'transparent', border: '1px solid #555', color: '#aaa' }}>
                 Skip Reward
             </button>
         </div >

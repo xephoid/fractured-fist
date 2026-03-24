@@ -3,6 +3,7 @@ import { useCampaign } from '../../context/CampaignContext';
 import { LOCATIONS } from '../../data/locations';
 import { levelThresholds, displayPlayerName } from '../../data';
 import { FACTIONS } from '../../data/factions';
+import { track } from '../../services/analytics';
 
 export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGame }) {
     const { state } = useCampaign();
@@ -13,7 +14,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h1>World Map</h1>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <button onClick={onOpenCollection}>Manage Techniques</button>
+                    <button onClick={() => { track('collection_opened', { from: 'world_map' }); onOpenCollection(); }}>Manage Techniques</button>
                     <div>
                         <div>{displayPlayerName(state.player)}</div>
                         <div>Level {state.player.level} {state.player.species}</div>
@@ -36,7 +37,7 @@ export default function WorldMap({ onSelectLocation, onOpenCollection, onResetGa
                     return (
                         <div
                             key={loc.id}
-                            onClick={() => !isLocked && onSelectLocation(loc.id)}
+                            onClick={() => { if (!isLocked) { track('location_selected', { location_id: loc.id, location_name: loc.name, location_type: loc.type }); onSelectLocation(loc.id); } }}
                             style={{
                                 position: 'absolute',
                                 left: `${loc.x}%`,

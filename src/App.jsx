@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CampaignProvider, useCampaign } from './context/CampaignContext';
 import { LOCATIONS } from './data/locations';
+import { track } from './services/analytics';
 import StartScreen from './components/screens/StartScreen';
 import WorldMap from './components/screens/WorldMap';
 import CombatScreen from './components/screens/CombatScreen';
@@ -53,6 +54,26 @@ function App() {
 
             const { newLevel, newStamina } = levelUp(state.player, xp);
 
+            track('combat_victory', {
+                enemy_name: activeEnemy?.name,
+                enemy_tier: tier,
+                enemy_faction: activeEnemy?.factionId,
+                location_id: activeLocation,
+                xp_earned: xp,
+                credits_earned: credits,
+                leveled_up: state.player.level !== newLevel,
+                new_level: newLevel,
+                player_species: state.player.species,
+            });
+
+            if (state.player.level !== newLevel) {
+                track('player_leveled_up', {
+                    new_level: newLevel,
+                    player_species: state.player.species,
+                    stamina_increase: newStamina - state.player.stamina,
+                });
+            }
+
             dispatch({ type: 'GAIN_XP', payload: xp });
             dispatch({ type: 'ADD_CREDITS', payload: credits });
             dispatch({ type: 'DEFEAT_CHAMPION', payload: { locationId: activeLocation, championTier: tier } });
@@ -96,18 +117,30 @@ function App() {
             });
             setView('REWARD');
         } else {
-            // Loss
+            track('combat_defeat', {
+                enemy_name: activeEnemy?.name,
+                enemy_tier: activeEnemy?.tier,
+                enemy_faction: activeEnemy?.factionId,
+                location_id: activeLocation,
+                player_species: state.player.species,
+            });
             setLastLog(log || []);
             setView('DEFEAT');
         }
     };
 
     const handleSelectReward = (techId) => {
+        track('technique_learned', {
+            technique_id: techId,
+            enemy_name: activeEnemy?.name,
+            enemy_tier: activeEnemy?.tier,
+        });
         dispatch({ type: 'UNLOCK_TECHNIQUE', payload: techId });
         setView('COLLECTION');
     };
 
     const handleResetGame = () => {
+        track('new_game_started', { player_species: state.player.species });
         dispatch({ type: 'RESET_GAME' });
         setView('START');
     };

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { TECHNIQUES, CARD_TYPES } from '../data/techniques';
 import { STARTING_HAND, MAX_MISSTEPS } from '../data';
+import { track } from '../services/analytics';
 
 // Helper: Shuffle
 const shuffle = (array) => {
@@ -151,6 +152,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         setDiscard(res.discard);
         setHand(res.hand);
 
+        track('focus_reload_used', { cards_redrawn: discardedCount, player_stamina: playerStamina, enemy_stamina: enemyStamina, turn });
         addLog(`Focus Ability: Redrew ${discardedCount} cards.`);
     };
 
@@ -230,6 +232,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
             addLog(`Sent ${toAdd} Missteps to opponent!${maxReached ? ' (Max reached)' : ''}`);
         }
 
+        track('card_played', { card_id: cardId, card_name: def.name, card_type: def.type, phase, turn });
         setPlayed(p => [...p, cardId]);
         addLog(`Played ${def.name}`);
     };
@@ -247,11 +250,14 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         setHand(newHand);
 
         // It is trashed (not discard), so just gone.
-        addLog(`Refined (Trashed) ${TECHNIQUES.find(c => c.id === cardToTrash)?.name}`);
+        const refinedName = TECHNIQUES.find(c => c.id === cardToTrash)?.name || cardToTrash;
+        track('card_refined', { card_id: cardToTrash, card_name: refinedName, turn });
+        addLog(`Refined (Trashed) ${refinedName}`);
         setRefinePending(p => p - 1);
     };
 
     const skipRefine = () => {
+        track('refine_skipped', { turn });
         setRefinePending(0);
         addLog("Refining skipped.");
     };
@@ -264,6 +270,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
         if (!def || spirit < def.cost || playerSupply[cardId] < 1) return;
         if (channels < 1) { addLog("No Channel buys remaining."); return; }
 
+        track('card_channeled', { card_id: cardId, card_name: def.name, cost: def.cost, spirit_available: spirit, turn });
         setSpirit(s => s - def.cost);
         setChannels(c => c - 1); // Decrement Channel Limit
         setPlayerSupply(s => ({ ...s, [cardId]: s[cardId] - 1 }));
@@ -274,6 +281,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
     const advancePhase = () => {
         if (refinePending > 0) { addLog("Must finish refining first."); return; }
         if (phase === PHASES.TECHNIQUE) {
+            track('phase_advanced', { from: 'TECHNIQUE', to: 'CHANNEL', turn, damage_queued: damageDealt, defense_built: defense });
             setPhase(PHASES.CHANNEL);
         }
     };
@@ -308,6 +316,7 @@ export function useCombat(playerStats, playerLoadout, enemyData, onCombatEnd) {
 
     // --- Actions ---
     const endPlayerTurn = () => {
+        track('turn_ended', { turn, damage_queued: damageDealt, defense_built: defense, spirit_spent: spirit });
         setPhase(PHASES.ENEMY_TURN);
         window.scrollTo(0, 0);
     };
